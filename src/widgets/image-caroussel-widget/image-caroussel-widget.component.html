@@ -1,0 +1,15 @@
+<div class="title">{{name}}</div>
+<p-carousel [value]="imageList">
+    <ng-template let-image pTemplate="item" >
+        <div class="content" (click)="currentImage=image.path;show=true;">
+            <img src="{{image.path}}" class="image"/>
+            <div>{{image.name}}</div>
+            <div>{{image.desc}}</div>
+        </div>
+    </ng-template>
+    
+</p-carousel>
+
+<p-dialog [(visible)]="show" [style]="{width: '50vw'}">
+    <img src={{currentImage}} class="showImage"/>
+</p-dialog>

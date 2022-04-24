@@ -1,0 +1,24 @@
+.content{
+    margin: .3rem;
+    text-align: center;
+    padding: 2rem 0;
+}
+.image{
+    
+    height:400px;
+    width:auto;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+    
+}
+
+.title{
+    font-size:35px;
+    font-weight: bolder;
+}
+
+.showImage{
+    width:100%;
+    height:auto;
+    margin-right:auto;
+    margin-left:auto;
+}

@@ -1,1 +1,124 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: 'aileronheavy';
+    src: url("../src/font/aileron-heavy-webfont.woff2") format('woff2'),
+         url("../src/font/aileron-heavy-webfont.woff") format('woff');
+    font-weight: normal;
+    font-style: normal;
+  
+  }
+  
+  @font-face {
+    font-family: 'bebasNeue';
+    src: url("../src/font/BebasNeue-Regular.woff2") format('woff2'),
+         url("../src/font/BebasNeue-Regular.woff") format('woff');
+    font-weight: normal;
+    font-style: normal;
+  
+  }
+  @font-face {
+    font-family: 'Montserrat';
+    src: url("../src/font/Montserrat-Light.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  
+  }
+
+body{
+    text-align:justify;
+    color:black;
+    font-family:'Montserrat';
+    margin-right:10%;
+    margin-left:10%;
+    font-size: 20px;
+
+}
+
+.mainTitle{
+    font-family: 'aileronheavy';
+    color: white;
+    font-size: 20px;
+    text-align: center;
+}
+
+.titleLine{
+    border: none;
+    background-color: #FCB820;
+    color:#FCB820;
+    height: 5px;
+    width: 50%;
+    border-radius: 10px;
+  }
+.greatLine{
+    border: none;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    background-color: #FCB820;
+    color:#FCB820;
+    height: 3px;
+}
+
+.cardComp{
+  border-radius:25px;
+  background-color: #292b2e;
+  text-align:center;
+  cursor:pointer;
+}
+.cardComp:hover{
+  background-color:#232427;
+}
+.sectionTitle{
+  font-size: 45px;
+    font-weight: bolder;
+    color: #EF8538;
+  }
+  
+  .subSectionTitle{
+      font-size: 35px;
+      font-weight: bolder;
+      color: #E63D6C;
+  }
+  
+  .subSubSectionTitle{
+      font-size: 20px;
+      font-weight: bolder;
+      color: #7488DC;
+  }
+  
+  .courseImage{
+      width:50%;
+      display:block; 
+      margin-right:auto;
+      margin-left:auto;
+      margin-top:20px;
+      margin-bottom:20px;
+  }
+  .coursePdf{
+    width :100%;
+     height:1000px;
+  }
+  ul li .courseListItem{
+      display: inline-block;
+      font-family: 'Montserrat', sans-serif;
+      color: white;
+      font-size: 14px;
+      text-align:justify;
+      text-decoration:none;
+  }
+  ul li:hover .courseListItem{
+      color:none;
+  }
+  
+  .table,
+  td {
+      border: 1px solid rgb(255, 255, 255);
+  }
+  
+  .table{
+      margin-top:20px;
+      margin-bottom:20px;
+      width:50%;
+      display:block; 
+      margin-right:auto;
+      margin-left:auto;
+  }

@@ -1,0 +1,29 @@
+<div class = "cardComp" (click)="goToLink(link)">
+<div class="grid" *ngIf="style.size=='col-12 md:col6 lg:col6 xl:col-4'">
+    <div class="col-12 titleCard" [style.color]="style.colorTitle">
+        {{name}}
+    </div>
+    <div class="col-12">
+        <p-image src={{imagePath}} height="100px"></p-image>
+    </div>
+    
+            
+
+</div>
+
+<div class="grid" *ngIf="style.size=='col-12'">
+    <div class="col-3">
+        <p-image src={{imagePath}} height="200px"></p-image>
+    </div>
+    <div class="col-1"></div>
+    <div class="col-7">
+        <div class="titleCard" [style.color]="style.colorTitle">{{name}}</div>
+        <div class="descCard">{{desc}}</div>
+    </div>
+            
+    
+
+</div>
+</div>
+                
+        

@@ -1,0 +1,29 @@
+.custom-marker {
+    display: flex;
+    width: 2rem;
+    height: 2rem;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    border-radius: 50%;
+    z-index: 1;
+}
+::ng-deep .p-fieldset{
+    background-color: #1E2124;
+    
+}
+
+.content{
+    margin: .3rem;
+    text-align: center;
+    padding: 2rem 0;
+    
+}
+.image{
+    height:200px;
+    width:auto;
+}
+
+.cardItem{
+    max-width:50%;
+}

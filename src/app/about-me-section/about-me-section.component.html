@@ -1,0 +1,202 @@
+<div class = "grid" id="me">
+    <div class="col-3">
+        <img src="../../assets/careerImages/profil3.JPG" style="width:100%;margin-top:25%;border-radius:50%">
+    </div>
+    <div class="col-8">
+        <div class = "title">
+            Arthur Docquois
+        </div>
+        <div class="desc">
+            <p>
+                Je suis étudiant ingénieur en Electrical engineering à <a href="https://www.imt-atlantique.fr/fr" class="link">IMT Atlantique</a>.
+            </p>
+            <p style="margin-top:20px">
+                Je suis spécialisé dans la conception matérielle et logicielle de sysèmes embarqués pour les domaines de l'IoT, des transports intelligents, de l'océanographie ...
+            </p>
+            <p style="margin-top:20px">
+                Mon objectif est d'en apprendre un maximum sur ces systèmes, leur fonctionnement, les enjeux qu'ils représentent dans un monde toujours plus connecté. Puis avec une formation supplémentaire en cybersécurité, je serrai capable d'apporter une expertise sur l'importance de sécuriser de tels systèmes, la façon de le faire et la façon de répondre à des crises cyber. 
+            </p>         
+        </div>
+    </div>
+</div>
+
+<div id = "timeline">
+    <p-timeline [value]="timeline" layout="horizontal" align="top">
+        <ng-template pTemplate="marker" let-element>
+            <span (click)="selectedElement=element.name" class="custom-marker shadow-2" *ngIf="selectedElement==element.name" [style.backgroundColor]="'#EF8538'">
+                <i [ngClass]="element.icon"></i>
+            </span>
+            <span (click)="selectedElement=element.name" class="custom-marker shadow-2" *ngIf="selectedElement!=element.name" [style.backgroundColor]="'#7488DC'">
+                <i [ngClass]="element.icon"></i>
+            </span>
+        </ng-template>
+        <ng-template pTemplate="content" let-element>
+            <p (click)="selectedElement=element.name" class="date"> {{element.date}} </p>
+        </ng-template>
+    </p-timeline>
+</div>
+
+<div id = "timeLineDesc" *ngIf="selectedElement=='Prépa PCSI/PSI*'" class="desc">
+    <h1 class="title">Calsse préparatoire aux grandes écoles d'ingénieurs PCSI/PSI*</h1>
+    <div class = "grid">
+        <div class="col-3">
+            <img src="../../assets/logo/faidherbe.svg"  style="width:80%;">
+        </div>
+        <div class="col-9">
+            Deux années de préparations aux concours d'entrées des grandes écoles d'ingénieur avec apprentissage intensif de :
+            <ul>
+                <li>Mathématiques : algèbre linéaire, analyse, probabilités</li>
+                <li>Sciences physiques : éléctrocinétique, mécanique du point et du solide, physique des ondes</li>
+                <li>Sciences industrielles et de l'ingénieur : automatique, dynamique et cinétique des solides</li>
+                <li>Philosophie sur les thèmes de la démocratie et de l'amour</li>
+                <li>Anglais</li>
+            </ul>
+        </div>
+    </div>
+    Ces deux années m'ont permis de repousser mes limites, d'apprendre à gérer la pression et d'apprendre à apprendre efficacement et rapidement un nombre important d'informations.
+</div>
+
+<div id = "timeLineDesc" *ngIf="selectedElement=='Première année IMT Atlantique'" class="desc">
+    <h1 class="title">Première année à IMT Atlantique Brest</h1>
+    <div class = "grid">
+        <div class="col-3">
+            <img src="../../assets/logo/IMTAtlantique.png"  style="width:80%;margin-top:25%">
+        </div>
+        <div class="col-9">
+            Année de tronc commun avec un large spectre disciplinaire :
+            <ul>
+                <li>Électronique numérique et analogique, physique des semi conducteurs</li>
+                <li>Sciences Physiques : physique des ondes, physique des antennes, mécanique des fluides, physique nucléaire</li>
+                <li>Mathématiques : maths appliqués à l'ingénieur, probabilité, statistques</li>
+                <li>Développement informatique : java, python, C++</li>
+                <li>Micro et Macro économie</li>
+                <li>Sensibilisation aux enjeux du développement durable</li>
+            </ul>
+        </div>
+    </div>
+    <div>
+        <p>Cette année aura été l'occasion pour moi de m'ouvrir à des sujets très divers pour orienter mon parcours.</p>
+        <p>Durant l'année de nombreux projets ont été réalisés en groupe ou seul, comme la réalisation d'un filtre, la création d'une IHM sous java, le développement avec Arduino d'une lampe intelligente</p>
+        <app-image-caroussel-widget [imageList]='[{"path":"../../assets/timelineImages/ModeEmp.png","name":"Projet Faire pour apprendre"},{"path":"../../assets/timelineImages/physique.png","name":"Physique des ondes"},{"path":"../../assets/timelineImages/antenne.png","name":"TP sur la réalisation de filtre"},{"path":"../../assets/timelineImages/IHM.png","name":"Création IHM avec Java Swing"}]'></app-image-caroussel-widget>
+    </div>
+</div>
+
+<div id = "timeLineDesc" *ngIf="selectedElement=='Stage en recherche'" class="desc">
+    <h1 class="title">Stage de première année à IMT Atlantique au département Mathematical and Electrical Engineering</h1>
+    <div class = "grid">
+        <div class="col-3">
+            <img src="../../assets/logo/pytorch.png" style="width:80%">
+        </div>
+        <div class="col-9">
+            <p>Stage d'un mois avec pour but de comparer différents modèles d'autoencodeur implémentés en python grâce à la bibliothèque Pytorch.</p>
+            <p>L'objectif du réseau de neuronnes étant de permettre de compresser des cartes météos de vents afin de les transmettre à un voilier via un canal bas débit (VHF)</p>
+        </div>
+    </div>
+    <div>
+        <p>Ce stage aura été l'occasion de découvrir diverses techniques de compression de données (différents modèles d'autoencodeur, analyse en composante principale) et d'avoir une introduction aux technologies utilisées en intelligence artificielle.</p>
+        <a href="http://0.0.0.0/course/Stage 1A" class="link">Voir les recherches effectuées</a>
+        <app-image-caroussel-widget [imageList]='[{"path":"../../assets/timelineImages/zone.png","name":"Zone météo"},{"path":"../../assets/timelineImages/comparaison FFT.png","name":"Comparaison entre carte de base et sortie du CNN"},{"path":"../../assets/timelineImages/carte de vent.png","name":"Carte de vent récupérée"}]'></app-image-caroussel-widget>
+    </div>
+</div>
+
+<div id = "timeLineDesc" *ngIf="selectedElement=='IMT Atlantique Nantes automatique et contrôle commande'" class="desc">
+    <h1 class="title">Deuxième année à IMT Atlantique en spécialisation automatique et contrôle commande</h1>
+    <div class = "grid">
+        <div class="col-3">
+            <img src="../../assets/logo/IMTAtlantique.png"  style="width:80%;margin-top:25%">
+        </div>
+        <div class="col-9">
+            Deuxième année avec étude de l'automatique et des lois de commandes :
+            <ul>
+                <li>Représentation d'état</li>
+                <li>Commande LQ</li>
+                <li>Synthèse de régulateur par placement de pôles ou retour d'état</li>
+                <li>Filtres de Kalman</li>
+                <li>Commande multi-objectif</li>
+                <li>Introduction au langage Bond Graph</li>
+                <li>Utilisation de Matlab Simulink</li>
+            </ul>
+        </div>
+    </div>
+    <p>Cette année a aussi été l'occasion de travailler sur un projet d'ingénieurie pour une entreprise ostréicole, afin de réaliser les plans d'une trieuse automatique compacte et rapide.</p>
+    <p>J'ai également réalisé un état de l'art sur la sécurité du continuum cloud/IoT, afin de protéger les données utilisées dans leur état "in use". J'y ai alors recensé les attaques principales inhérentes à l'utilisation du cloud et montré en quoi les Trusted Execution Environment
+        pouvaient constituer une réponse à ces menaces.  </p>
+    <p><a href="http://0.0.0.0/course/S%C3%A9curit%C3%A9%20dans%20le%20cloud" class="link">Voir les recherches effectuées</a></p>
+    <app-image-caroussel-widget [imageList]='[{"path":"../../assets/timelineImages/mtlab.png","name":"Utilisation de Matlab"},{"path":"../../assets/timelineImages/Simulink.png","name":"Utilisation de Simulink"},{"path":"../../assets/timelineImages/attackmap.png","name":"Sécurité sur le cloud"},{"path":"../../assets/timelineImages/trieuseHuitre.png","name":"Proket entreprise"}]'></app-image-caroussel-widget>
+</div>
+
+<div id = "timeLineDesc" *ngIf="selectedElement=='Stage ingénieur à Ifremer'" class="desc">
+    <h1 class="title">Stage ingénieurie à Ifremer</h1>
+    <div class = "grid">
+        <div class="col-3">
+            <img src="../../assets/logo/Logo-Ifremer.png"  style="width:80%;margin-top:50%">
+        </div>
+        <div class="col-9">
+            <p>Stage de 3 mois à l'Ifremer dans le service instrumentation et ingénierie marine. L'objectif du stage était de moderniser une interface web embarqué sur les systèmes de mesures (observatoire fond de mer, bouées côtières, profileurs dérivants). Le but était de rendre l'interface plus intuitive et de proposer de nombreux services pour contrôler le bon fonctionnement du système.</p>
+            <p>L'interface web a été réalisée à l'aide du framework Angular</p>
+            Voici les missions qui ont été portées :
+            <ul>
+                <li>Création de widgets pour récupérer et visualiser les mesures des capteurs (graphe, tableau)</li>
+                <li>Création de widgets pour le contrôle des paramètres généraux du système (heure, mémoire disponible ...)</li>
+                <li>Création de widgets pour utiliser les pins I/O et PWM du système depuis l'interface</li>
+                <li>Création de widgets pour utiliser le protocole One Wire depuis l'interface</li>
+                <li>Création en C d'un driver logiciel pour utiliser une sonde multi-paramère fonctionnant avec le protocole Modbus</li>
+            </ul>
+        </div>
+    </div>
+    <p>Ce stage aura été l'occasion pour moi de renforcer mes compètences en développement web et en développement embarqué, mais surtout de découvrir de nouveaux systèmes, leurs enjeux et leurs contraintes (très faible consommation, faibles mémoires, besoin d'une longue autonomie ...)</p>
+    <p>J'y ai aussi découvert les outils mis en place pour observer les océans et les différentes missions portées par l'Ifremer.</p>
+    <p><a href="http://0.0.0.0/course/Stage 2A à Ifremer" class="link">Voir les réalisations</a></p>
+    <app-image-caroussel-widget [imageList]='[{"path":"../../assets/timelineImages/montage.jpg","name":"Expérimentation sur le système"},{"path":"../../assets/timelineImages/laboElec.jpg","name":"Expérimentation sur sonde"},{"path":"../../assets/timelineImages/measureDyn.png","name":"Page de visualisation des données"}]'></app-image-caroussel-widget>
+</div>
+
+<div id = "timeLineDesc" *ngIf="selectedElement=='Semestre d\'échange académique à TUM'" class="desc">
+    <h1 class="title">Semestre d'échange académique à la Technische Universität München</h1>
+    <div class = "grid">
+        <div class="col-3">
+            <img src="../../assets/logo/TUM.png"  style="width:80%;margin-top:25%">
+        </div>
+        <div class="col-9">
+        </div>
+    </div>
+</div>
+
+<div id = "timeLineDesc" *ngIf="selectedElement=='IMT Atlantique Système Embarqué Hétérogène'" class="desc">
+    <div class = "grid">
+        <div class="col-3">
+            <img src="../../assets/logo/IMTAtlantique.png"  style="width:80%;margin-top:25%">
+        </div>
+        <div class="col-9">
+        </div>
+    </div>
+</div>
+
+<div id = "timeLineDesc" *ngIf="selectedElement=='Futur'" class="desc">
+    TUM
+</div>
+
+<hr class = 'mainSubTitle-line'>
+
+<div id="engagement">
+    <div class = "title">
+        Mon engagement étudiant
+    </div>
+
+    <p-carousel [value]="assos" [numVisible]="3" [numScroll]="1" [circular]="true" [autoplayInterval]="3000">
+        <ng-template let-asso pTemplate="item">
+            <img src={{asso.image}}  style="width:200px;">
+        </ng-template>
+    </p-carousel>
+</div>
+
+<div id = "MapOfSchools">
+    <div class="map-container">
+        <div class="map-frame">
+          <div id='mapSchools'></div>
+        </div>
+    </div>
+</div>
+
+<div id="carrouSchool">
+    <app-image-caroussel-widget [imageList]='[{"path":"../../assets/logo/IMTAtlantique.png"},{"path":"../../assets/logo/TUM.png"},{"path":"../../assets/logo/faidherbe.svg"}]'></app-image-caroussel-widget>
+</div>

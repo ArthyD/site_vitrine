@@ -1,0 +1,20 @@
+<p-fieldset legend="" [toggleable]="true">
+<div class ="grid">
+
+<p-timeline [value]="events" align="alternate" styleClass="customized-timeline">
+    
+    <ng-template pTemplate="marker" let-event>
+        <span class="custom-marker shadow-2" [style.backgroundColor]="event.color">
+            <i [ngClass]="event.icon"></i>
+        </span>
+    </ng-template>
+    <ng-template pTemplate="content" let-event>
+        <p-card [header]="event.name" [subheader]="event.date" class="col-6">
+            <img *ngIf="event.image" [src]="event.image" [alt]="event.name" height="100" />
+            <p>{{event.desc}}</p>
+    </p-card>
+    </ng-template>
+
+</p-timeline>
+</div>
+</p-fieldset>
