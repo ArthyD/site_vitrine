@@ -1,1 +1,17 @@
-<app-about-me-section></app-about-me-section>
+<p-toolbar styleClass="toolBar">
+  <div class="p-toolbar-group-left">
+
+  </div>
+  <div class="p-toolbar-group-right">
+    <p-menubar [model]="items" styleClass="menuBar"></p-menubar>
+  </div>
+
+</p-toolbar>
+
+<div class="mainContent">
+  <router-outlet></router-outlet>
+</div>
+
+<footer class="footer-basic">
+  <div class="text-center social"><a href="https://github.com/ArthyD"><i class="pi pi-github" style="font-size:1.5rem"></i></a><a href="https://www.linkedin.com/in/arthur-docquois"><i class="pi pi-linkedin" style="font-size:1.5rem"></i></a><a href="https://www.instagram.com/invites/contact/?i=2w2le0ok6eli&utm_content=euvby5y"><i class="pi pi-instagram" style="font-size:1.5rem"></i></a></div>
+</footer>

@@ -1,0 +1,509 @@
+<h1 style="text-align:center"> La sécurité des données in use dans le continuum cloud IoT</h1>
+
+<div class="tableOfContent">
+    <ol>
+        <li><a href="/secuCloud#Contexte">Contexte de l'étude</a></li>
+        <li><a href="/secuCloud#Structure">Structure du cloud</a></li>
+        <li><a href="/secuCloud#BestPractices">Les best practices sur le cloud</a></li>
+        <li><a href="/secuCloud#Providers">Solutions proposées par les Cloud Providers</a></li>
+        <li><a href="/secuCloud#TEE">Les trusted execution environment</a></li>
+        <li><a href="/secuCloud#Conclusion">Conclusion</a></li>
+        <li><a href="/secuCloud#Sources">Sources</a></li>
+    </ol>
+</div>
+
+<h1 id="Contexte">Contexte</h1>
+<h2>Les télécoms et le cloud</h2>
+<p>
+<a href="https://www.silicon.fr/hub/colt-hub/services-telecoms-quand-le-cloud-ouvre-de-nouvelles-voies-dexploitation#" class="link">Les opérateurs télécoms se tournent de plus en plus vers des solutions Cloud</a>. Les services qu'ils assuraient aux entreprises migrent vers le cloud et deviennent alors virtualisés. Ainsi les opérateurs peuvent dissocier leurs plateformes logicielles et matérielles, mais également mieux contrôler l'allocation de ressources réseau des datacenters. Quels sont les avanatges ?
+</p>
+<p>
+Les opérateurs peuvent proposer à leurs clients, une facturation à l'usage de ressource tout en garatissant un service plus efficace. Le support et la maintenace sont aussi simplifiés par l'intégration entre le cloud et les infastructures traditionnelles.
+</p>
+<p>
+C'est pour cela que de plus en plus d'infrastructures as a service (IaaS) voient le jour et permettent de combiner les services de téléphonie, de communication unifiée et les applications informatiques. 
+</p>
+<h2>Le cloud telecom</h2>
+Dans le cadre des télécoms, le cloud représente les ressources des datacenters pour les fonctions des réseaux mobiles, les opérations et le déploiement des transferts de données. <a href="https://www.telcodr.com/15-examples-of-how-telcos-are-moving-to-the-public-cloud/" class="link"> On peut prendre plusieurs exemples d'utilisation du cloud par des entreprises des télécoms mondiales : </a>
+<ul>
+    <li> Migration de tout les services informatiques pour réduire le nombre de datacenters (Deutsche Telecom, Globe Telecom)</li>
+    <li> Analyse des données (Vodafone)</li>
+    <li> Facturation en temps réel (Truphone)</li>
+    <li> Gestion des problèmes des utilisateurs (Vodafone, Verizon)</li>
+    <li> Construction de solution de edge computing </li>
+    <li> Détection de fraude</li>
+    <li> ...</li>
+</ul>
+
+<p>
+Les technologies cloud se sont imposés aux opérateurs télécoms comme une obligation aussi bien pour gagner en performance que pour palier aux demandes des clients qui se tournent de plus en plus vers le cloud pour leur travail.
+</p>
+<h1 id="Structure">Structure du cloud</h1>
+<h2>Infrastructure cloud</h2>
+L'infrastructure cloud fait référence aux ressources nécessaires au fonctionnement du cloud. <a href="https://www.redhat.com/fr/topics/cloud-computing/what-is-cloud-infrastructure" class="link">On retrouve 4 grandes catégories de composants </a> : le hardware, la virtualisation, le stockage, le réseau.
+<h3>Le hardware</h3>
+Le hardware comprend toutes les machines physiques qui vont entrer en jeu pour la réalisation du cloud. On retrouve : 
+<ul>
+    <li> Les équipements réseaux (switch, routeurs, firewall, fibre optique ...) </li>
+    <li> Les serveurs </li>
+    <li> Les storage arrays </li>
+    <li> Les load balancers pour répartir la charge de travail entre les serveurs </li>
+</ul>
+
+Dans le cloud la virtualisation extrait les ressources  des serveurs et les dissocie des machines pour qu'elles soient accessibles au client.
+
+<h3>La virtualisation</h3>
+C'est ce qui va permettre de séparer les services et les fonctions des machines du hardware grâce à un superviseur.
+
+<h3>Le stockage</h3>
+<p>
+Les données sont stockées dans différents disques regroupés dans un ensemble de stockage unique. Cela va permettre d'assurer une bonne accessibilité des données avec des sauvegardes régulières.
+</p>
+<p>
+La virtualisation va dissocier l'espace disque du matériel pour proposer un service de stockage cloud. Cela rend le stockage plus modulable pour le client qui peut choisir d'augmenter ou diminuer son espace de stockage sans avoir à ajouter des disques aux serveurs.
+</p>
+<h3>Le réseau</h3>
+<p>
+Le réseau physique est constitué de fibre optiques, de routeurs, de switch ... Ces ressources sont également virtualisées dans le cloud. Une couche réseau virtuelle s'ajoute alors au dessus de la couche réseau physique.
+</p>
+<p>
+Le réseau virtuel se compose de multiples sous réseaux avec différents niveaux de visibilité. Cela permet la création de LAN virtuelles fonctionnant comme un réseau physique, avec un système d'assignement d'adresses (statique ou dynamique). 
+</p>
+<h2>La virtualisation</h2>
+<p>
+<a href="https://devopssec.fr/article/differences-virtualisation-et-conteneurisation" class="link">La virtualisation </a> va permettre au travers d'un hyperviseur de mettre en commun les ressources des machines qui vont composer le cloud. L'hyperviseur extrait les ressources des machines (mémoire, puissance de calcul, ports réseau ...) et crée des pools de ressources centralisés qui seront ensuite utilisable dans le cloud. 
+</p>
+<p>
+Le client choisit ensuite les ressources dont il a besoin, et va installer une image et des applications sur un pool de ressources.
+</p>
+<p>
+Il existe également la conteneurisation où le client crée des conteneurs dans le cloud dans lequel il fournit les libraires et l'application. Ces conteneurs partagent l'OS de la machine hôte. L'avantage des conteneurs réside dans leur légèreté par rapport à la mise en place d'une machine virtuelle. La conteneurisation va s'appuyer sur des outils comme Kubernetes et docker pour le déploiement et la gestion des conteneurs.
+</p>
+<img src="../../assets/secuCloud/virtualisation.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+
+Ces concepts de virtualisation et de conteneurisation permettent la création du cloud. Les performances vont être séparées du hardware, cela permet donc à des entreprises de bénéficier de bonnes puissances de calcul (par exemple) sans avoir à investir dans du matériel très coûteux. Dans le cas du cloud le client paye à la consommation de ressources ce qui simplifie l'utilisation des ces ressources et permet de réaliser des économies.
+
+<h2>Utilisation du cloud</h2>
+Aujourd'hui on peut différencier trois types de cloud :
+<ul>
+    <li> Les cloud privés : cloud accessible par une entreprise unique </li>
+    <li> Les clouds publics : des cloud providers mettent à disposition leurs ressources cloud à leurs clients </li>
+    <li> Les clouds hybrides : pour bénéficier des avantages des deux types de cloud </li>
+</ul>
+
+Les services cloud les plus important aujourd'hui sont : Amazon web service, Microsoft Azure, Google cloud, Alibaba cloud, Oracle cloud, IBM cloud et Tencent cloud.
+
+<img src="../../assets/secuCloud/cloudProviders.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+
+<p>
+Lorsqu'un client veut déployer une application sur le cloud, il commence par choisir les ressources dont il va avoir besoin (CPU, GPU, stockage ...), l'hyperviseur va proposer ces ressources en créant un pool à partir des machines du cloud provider, le client installe une image sur la machine virtuelle et installe son application (dans le cas de virtualisation). 
+</p>
+<p>
+Lorsque le client veut utiliser cette ressource, il se connecte via internet à la machine sur le réseau virtualisé.
+</p>
+<img src="../../assets/secuCloud/useCloud.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+
+<p>
+Dans le cas des cloud publics, tout les clients se retrouvent sur une même infrastructure. L'objectif des clients est alors de pouvoir disposer des ressources du cloud tout en assurant la confidentialité des données, leur intégrité et leur disponibilité. 
+</p>
+<p>
+Cependant les infrastructures cloud offrent une surface d'attaques possibles très large, le nombre de composant en qui faire confiance est bien plus important que sur une infrastructure on premise classique. La sécurité dans le cloud va donc se baser sur de l'isolation forte, le concept de zero trust, le respect des best practices et sur le chiffrement. 
+</p>
+<h1>Données et menaces</h1>
+
+<h2>Les données à protéger</h2>
+Les données peuvent avoir trois états :
+<ul>
+    <li> In rest : lorsqu'elles sont stockées </li>
+    <li> In transit : lorsqu'elles se déplacent via le réseau </li>
+    <li> In use : lorsqu'elles sont utilisées par une application </li>
+</ul>
+
+<p>
+Dans chacun de ces états, le client va vouloir assurer : confidentialité, intégrité, disponibilité. Ceci est valable aussi bien pour les simples données (informations utilisateurs, dataset d'entrainement de machine learning ...) que les codes des applications déployées sur le cloud.
+</p>
+<p>
+Par exemple : un hôpital souhaite créer une application d'aide à la décision pour détecter les tumeurs d'un patient et pouvoir prendre des mesures rapidement, pour cela il crée un modèle de machine learning. L'hôpital va donc avoir besoin de : puissance de calcul, de données d'entraînement (qui peuvent provenir d'autres hôpitaux), de stockage de données ...
+</p>
+<p>
+Cet hôpital va donc se tourner vers les ressources du cloud. Cependant il veut s'assurer que les données de ses patients restent confidentielles (données très sensibles) quelque soit leur état, que ces données ne soient pas modifiées, que le code et les poids du modèles ne soient pas modifiés (la conclusion ne doit pas avoir été altérée), que le code et les poids restent confidentiels.
+</p>
+<h2>Les différents acteurs</h2>
+<p>
+Dans le cloud (et en général) on peut distinguer deux groupes d'attaquants efficaces :
+</p>
+<p>
+Les cybercriminels on parle ici des cybercriminels qui vont utiliser le hacking pour faire du profit (la cybercriminalité rapporte aujourd'hui plus que le marché de la drogue). On retrouve alors des organisations très segmentées où chaque acteur est intouchable (par exemple un chercheur qui trouve une faille de sécurité n'est pas coupable il n'a fait que trouver la faille il ne l'a pas exploitée). De plus ces organisations sont internationales ce qui multiplie le nombre de juridiction qui entrent en jeu. Ces organisations vont faire du profit avec du ransomware principalement et n'ont pas de cibles précises. 
+</p>
+<p>
+Les Nation States Sponsored actors on parle ici d'organisations officielles ou non qui vont travailler (pour un État) avec un but bien précis. Ces organisations vont avoir du temps et de gros moyens pour parvenir à leur fin. Par exemple : la désinformation pendant des campagnes présidentielles (France, États-Unis ...) 
+</p>
+<p>
+Les menaces qui nous intéressent sont celles issues des Nation States Sponsored Actors. Les cloud providers sont exclus des groupes qui constituent une menace puisque ce n'est pas dans leur intérêt de ne pas respecter les exigences de sécurité de leurs clients.
+</p>
+<p>
+Le risque qui peut provenir d'un cloud provider est dans le cas d'un employé payé par ces Nations States Sponsored Actors pour faciliter leur attaque.
+</p>
+
+<h2> Les menaces </h2>
+<p>
+Dans cette partie nous allons nous intéresser aux différents types d'attaques auxquelles les cloud vont être sensible.
+</p>
+<p>
+Les attaques ciblant le cloud sont répertoriées dans une matrice réalisée par <a href="https://attack.mitre.org/matrices/enterprise/cloud/" class="link">MITRE</a>. On y retrouve la description de la killchain dans le cloud, c'est à dire les différents étapes permettant à un attaquant de s'introduire dans l'infrastructure, en prendre le contrôle, maintenir sa présence et exploiter son contrôle. Pour chaque étape MITRE décrit les techniques et procédés mis en place ainsi que les façon de détecter et mitiger ces attaques. 
+</p>
+<img src="../../assets/secuCloud/killchain.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+
+<h3>Firmware attacks</h3>
+
+<p>
+Comme le firmware se situe une couche en dessous de l'OS, il est une cible de choix pour les attaquants. C'est au niveau du firmware que se situe les informations les plus sensibles tels que les clés de cryptage ou les credentials.
+</p>
+<p>
+De plus, la plupart du temps les équipes de sécurités se concentrent majoritairement sur les corrections de software, sur la mise à jour du hardware, <a href="https://www.microsoft.com/security/blog/2021/03/30/new-security-signals-study-shows-firmware-attacks-on-the-rise-heres-how-microsoft-is-working-to-help-eliminate-this-entire-class-of-threats/" class="link">et très peu sur la défense du firmware</a>.
+</p>
+Dans le cloud cette attaque se traduit par :
+<ol>
+    <li> L'attaquant souscrit à un abonnement sur le cloud d'une ressource. </li>
+    <li> L'attaquant gagne un accès à la machine installe un malware. </li>
+    <li> L'attaquant arrête son abonnement, mais le malware reste sur la machine. La machine est corrompue.</li>
+    <li> Un nouveau client arrive et récupère une machine avec un malware sans le savoir. </li>
+</ol>
+
+Pour l'attaquant l'accès au firmware lui donne accès aux flux de données, aux disques,... comme si il avait un accès physique à la machine. Le firmware fait donc partie des cibles des attaques et est donc à exclure des composants de confiance sur le cloud. 
+
+<img src="../../assets/secuCloud/firmware.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+
+<h3>Supply cahin attack (Software et hardware)</h3>
+<p>
+Ce type d'attaque fait partie des attaques qui inquiètent le plus les équipes de sécurité, à cause de l'ampleur qu'elles peuvent prendre. 
+</p>
+<p>
+Lors du développement d'applications, les développeurs utilisent tous des librairies. Le plus souvent ces librairies sont supposées bien connues (Tensorflow, numpy, scikit-learn pour le machine learning sous Python par exemple). Cependant l'origine de ces librairies est bien moins connue.
+</p>
+<p>
+Ainsi, si un développeur installe une mauvaise librairie lors de sa conception sans s'en rendre compte, le produit final qui serra distribué pourrait compromettre la sécurité de tout les clients. La même chose arrive avec l'installation de logiciels. Voici quelques exemples récents de ce type d'attaques : 
+</p>
+<p>
+<a href="https://www.protocol.com/newsletters/protocol-enterprise/solarwinds-hack-government?rebelltitem=1#rebelltitem1" class="link">SolarWinds</a> c'est l'une des premières attaques de ce type en 2020. 
+</p>
+<p>
+SolarWinds est une entreprise qui développe des logiciels pour la gestion de réseaux, des systèmes et d'infrastructure informatique. Parmi ses clients on retrouve le département de la sécurité intérieure des États-Unis, le département du Trésor des États-Unis, la  National Nuclear Security Administration et bien d'autres services gouvernementaux et clients privés.
+</p>
+<p>
+L'attaquant a réussi à infecter le logiciel de mise à jour de l'outil Orion de SolarWinds, le logiciel avait alors un malware installant une backdoor permettant l'accès à distance au serveur sur lequel tournait l'application. Environs 18 000 clients sont concernés par cette attaque dont de nombreux services critiques de l'administration américaine.  L'efficacité de l'attaque repose aussi sur le fait que les attaquants aient réussis à signer leur contenu comme si il s'agissait d'une mise à jour approuvée de SolarWinds.
+</p>
+<p>
+Cela montre l'ampleur que peut avoir une attaque de Supply Chain côté software, une seule attaque permet d'infecter tout les clients de l'entreprise et en fait des cibles faciles.
+</p>
+<p>
+Russian nation-state actor <a href="https://blogs.microsoft.com/on-the-issues/2021/10/24/new-activity-from-russian-actor-nobelium/" class="link">Nobelium</a> L'équipe de sécurité de Microsoft a détecté que Nobelium (à l'origine de l'attaque sur SolarWinds) vise désormais les revendeurs et distributeurs de logiciels, avec le même objectif que pour SolarWinds : infecter le plus de clients de ces entreprises afin d'obtenir un accès à long-terme aux différents maillons de la suppluy-chain des logiciels. 
+</p>
+<p>
+Ces attaques ont  été repérées par l'équipe de Microsoft mais sont encore peu connues ce qui le rend efficaces et inquiétantes. De plus avec le Cloud, de plus en plus d'entreprises s'ajoutent à cette supply chain et doivent être protégés des groupes comme Nobelium.
+</p>
+<img src="../../assets/secuCloud/SupplyChain.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+<p>
+Attaque sur la supply chain Hardware De la même façon que lors de la fabrication et/ou distribution des logiciels, le hardware peut aussi être la cible de l'installation de composants malveillants. Par exemple il est possible d'ajouter à la puce une partie permettant d'interroger un serveur DNS et de prendre contrôle de la machine à distance. Ces attaques, bien que hypothétiques,  sont très efficaces puisqu'il est impossible de détecter sur le hardware l'installation d'un device non prévu (milliards de semi conducteur et gravures avec un ordre de grandeurs du nanomètre).
+</p>
+<p>
+Ces attaques montrent que les logiciels disponibles sur le cloud et parfois même le hardware utilisé sont à sortir des composants de confiance.
+</p>
+<h3>Side channels attack</h3>
+
+Les attaques par canal auxiliaire tentent d'exploiter des failles de l'implémentation logicielle ou matérielle de la machine lors de son utilisation. On va retrouver :
+<ul>
+<li> Intrusion au hardware avec installation d'une sonde pour surveiller</li>
+<li> Analyse de la consommation électrique pour déduire les opérations en cours</li>
+<li> Analyse d'émanation électromagnétiques</li>
+<li> Cryptanalyse acoustique : étude du bruit  généré lors du chiffrement</li>
+<li> Analyse du trafic entre éléments</li>
+</ul>
+
+<p>
+Ces attaques nécessitent un accès physique à la machine et la possibilité de l'analyser. Bien que ces attaques soient complexes elles sont très efficaces et quasiment indétectables voire indétectable pour les attaques non invasives.
+</p>
+<p>
+Un exemple d'attaque est l'observation de la consommation électrique de la machine au moment de la génération des clefs de chiffrement. La consommation électrique d'un bit 0 ou d'un bit 1 étant différente, il est possible de déduire les opérations qui ont eu lieu.  
+</p>
+<h3>VM escape attack</h3>
+<p>
+Une dernière attaque qui montre la faiblesse du cloud est l'attaque par évasion de machine virtuelle. Dans ce cas l'attaquant exploite une faille de l'hyperviseur pour avoir, non pas uniquement accès à sa machine virtuelle, mais à toutes celles qui sont gérées par l'hyperviseur. Cette attaque est complexe puisqu'elle nécessite de réussir à s'échapper de la machine virtuelle puis de s'attaquer à l'hyperviseur.
+</p>
+<p>
+<a href="https://arstechnica.com/information-technology/2017/03/hack-that-escapes-vm-by-exploiting-edge-browser-fetches-105000-at-pwn2own/" class="link">Cela a été réalisé en 2017 dans un concours de hacking</a>, l'attaque a nécessité d'exploiter : un bug de heap overfolw de Edge via le moteur Javascript, puis un type confusion flaw du kernel windows afin de s'échapper de la machine virtuelle et enfin une vulnérabilité de VMware à cause d'un buffer non initialisé. Pour résumer cette attaque revient à s'échapper d'Alcatraz puis de pénétrer Fort Knox dans la foulée. 
+</p>
+<img src="../../assets/secuCloud/VMescape.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+<p>
+Si cette attaque est réalisée, l'attaquant pourrait alors avoir accès à des données telles que la mémoire volatile des autres machines virtuelles. Il serrait alors en capacité de récupérer des informations telles que des clefs de chiffrement. 
+</p>
+<p>
+Ce type d'attaque montre que l'un des composants fondamentaux du cloud : l'hyperviseur, est une cible de choix pour un attaquant qui souhaiterait récupérer les données des différents clients sur le cloud.
+</p>
+<h2>Bilan</h2>
+<p>
+Bien d'autres attaques existent comme les attaques sur protocoles, sur le software ou encore qui visent la cryptographie. Cela montre que dans le cloud la surface d'attaque est grande : tout les composants sont sujets à des vulnérabilités et les attaques peuvent venir du monde entier. 
+</p>
+<img src="../../assets/secuCloud/attackmap.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+
+Pour protéger une donnée trois concepts clefs sont à appliquer : l'isolation, le zero trust et le chiffrement. Nous allons maintenant voir ce qui se fait sur le marchée du cloud pour garantir la protection des données.
+
+<h1 id="BestPractices">Best practices dans le cloud</h1>
+
+<p>
+Comme il a été montré avec l'attaque Solar Winds, les clients des ressources cloud sont en partie responsables de s'assurer d'un usage sécurisé. Dans le cas des attaques par Supply Chain les clients deviennent des victimes à cause d'une installation non contrôlée d'une librairie ou d'un logiciel. Dans le cas du cloud les conséquences peuvent être désastreuse puisque le client n'est pas le seul sur l'infrastructure. 
+</p>
+<p>
+Pour cela les clients sont fortement encouragés à suivre ce qu'on appelle les "best practices" qui sont un ensemble de règles à appliquer pour s'assurer un usage correct du cloud. 
+</p>
+<p>
+Ces règles ont été rappelées par Microsoft dans <a href="https://msrc-blog.microsoft.com/2020/01/22/access-misconfiguration-for-customer-support-database/" class="linl">un billet</a> où ils reconnaissent avoir fait des erreurs de configuration qui ont laissé ouvertes et accessibles leurs bases de données sans aucune protection. Leur objectif est alors de rappeler à tout les utilisateurs comment éviter d'en arriver à ce genre d'erreurs. On peut prendre pour exemple :
+</p>
+<ul>
+    <li> Mise en place de politiques pour éviter les mauvaises configurations (si l'application ne respecte pas ces politiques elle ne peut pas être déployée)
+    <li> La surveillance des ressources 
+    <li> Créer des groupes de sécurités au sein des réseaux (virtuels) et y appliquer des règles (contrôle origine du trafic entrant/sortant par exemple)
+    <li> ...
+</ul>
+<p>
+Les utilisateurs du cloud peuvent également se tourner vers le <a href="https://www.cisecurity.org/" class="link">Center for Internet Security</a> qui fournit pour chaque plateforme cloud, une série de recommandations qui permettent d'avoir un usage sécurisé du cloud. Par exemple pour OCI (cloud Oracle), le CIS propose un document de 128 pages sur la gestion des identités et des accès, l'utilisation du réseau, les connexions et la surveillance, le stockage des objets, la gestion des assets. Ces documents sont gratuit et libre d'accès. 
+</p>
+<p>
+Il est du devoir des cloud providers de s'assurer que leurs clients connaissent et appliquent ces règles. Un incident sur leur cloud, même si il est du à un mauvais usage d'un client, aura une mauvaise influence sur leur image de marque.
+</p>
+<h1 id="Providers">Solutions proposées par les cloud providers</h1>
+<h2>Le chiffrement</h2>
+<p>
+Le chiffrement est un des concepts les plus fondamentaux en sécurité informatique. Aujourd'hui le chiffrement sert à protéger les données in use et in transit. Deux grandes familles de chiffrements existent :
+</p>
+<p>
+Le chiffrement symétrique où une clef sert à chiffrer et déchiffrer la donnée. On retrouve des méthodes comme le chiffrement de Vernam pour lequel la clef et le message ont la même taille. Le chiffrement AES qui est le standard de chiffrement aujourd'hui qui divise le message en en blocks de 128 bits et génère des clefs de 128 ou 192 ou 256 bits. Le défaut de ces méthodes est le besoin d'échanger les clefs.
+</p>
+<p>
+Le chiffrement asymétrique où deux clefs sont générées : la clef publique qui sert à chiffrer les messages et la clef privée qui sert à déchiffrer ces messages.
+</p>
+<img src="../../assets/secuCloud/chiffrement.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+<p>
+Les clefs doivent impérativement rester secrètes (sauf les clefs publiques) pour assurer la confidentialité des données stockées ou échangées. Le chiffrement est bien entendu mis en place par les cloud providers sur les infrastructures cloud. 
+</p>
+<p>
+Cependant la cryptographie possède ses limites. Premièrement elle ne permet pas de protéger les données in use. Des projets de recherche sur le chiffrement homomorphique cherchent à permettre l'utilisation des algorithmes sur des données chiffrées. Par exemple faire du machine learning sur des données chiffrées, ainsi les données in use seront aussi protégées par le chiffrement.
+</p>
+<p>
+De plus le chiffrement n'est qu'une protection temporaire, les avancées technologiques et la cryptanalyse rendent le chiffrement inefficace sur le long terme. Par exemple si une organisation avec de très gros moyens enregistre toutes les communications utilisant une méthode de chiffrement, alors le jour où une faille est trouvée dans cette méthode, toute ces communications pourront être lues sans avoir recours à une méthode type bruteforce.
+</p>
+<h2>Protection des firmwares</h2>
+<p>
+Afin d'assurer que le firmware n'est pas corrompu les cloud providers appliquent le principe de zero trust qui dit de ne jamais faire confiance et de toujours vérifier.
+</p>
+<p>
+Chez Oracle on retrouve alors le concept de hardware based root of trust. Le principe est de rajouter un appareil aux machines qui lorsqu'un client quitte la machine et qu'un autre arrive pour le remplacer, l'appareil écrase l'ancien firmware et le remplace avec une image dite de confiance.
+</p>
+<h2>Sécurisation des réseaux</h2>
+
+<h3>Découplage hyperviseur / virtualisation du réseau</h3>
+<p>
+L'une des raisons pour laquelle le cloud possède une si grande surface d'attaque est qu'il se trouve sur internet et donc que le monde entier peut y avoir accès. La virtualisation comprend une couche réseau puisque l'hyperviseur va virtualiser les ports logiciels de la machine. Cela ne permet pas d'isoler correctement les machines et fait de l'hyperviseur une des cibles privilégiées d'attaques : en contrôlant l'hyperviseur, l'attaquant peut contrôler le réseau virtualisé et donc remonter aux autres machines gérées par l'hyperviseur.
+</p>
+<p>
+Une idée est alors de séparer la virtualisation du réseau de l'hyperviseur. Il y a toujours une virtualisation du réseau mais elle est gérée par une autre machine physique avec un autre software. Cela permet de se prémunir d'attaques comme les attaques de type VM escape.
+</p>
+<img src="../../assets/secuCloud/netVirt.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+
+<h3>Séparation d'internet</h3>
+<p>
+Pour sécuriser les machines sur le cloud, la stratégie est de les isoler au maximum. L'idée est alors de sécuriser les communications sur internet voire d'isoler complètement les machines d'internet. Par exemple il est possible de mettre en place un VPN sécurisé qui va créer un tunnel entre le client et le cloud pour qu'il puisse exécuter ses applications. 
+</p>
+<p>
+Une autre possibilité est de ne plus passer par internet pour exécuter les applications dans le cloud. Pour cela le client et le datacenter cloud sont reliés par fibre optique de façon sécurisée (MACsec, chiffrement ...). Lorsque le client souhaite accéder à ses applications il le fait sur un espace en réseau entre ses machines et le datacenter mais isolé d'internet. À cela le client ajoute une isolation de son réseau interne (réseau qui ne permettent pas de se connecter à internet), la surface d'attaque est grandement réduite. 
+</p>
+<img src="../../assets/secuCloud/noInternet.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+<p>
+Pour un attaquant il faut un accès physique chez le client ou le cloud provider, mais les datacenters sont extrêmement protégés : choix de localisation stratégiques, robustesse aux pannes électriques, contrôle des accès ...
+</p>
+<h2>Les policies</h2>
+<p>
+Une dernière stratégie mise en place par les cloud providers pour sécuriser les machines est de mettre en place un certain nombre de policies pour réguler les accès. On retrouve alors la création d'enclaves, ces enclaves ont des profils de communications uniques et servent et vont proposer des services tels que : networking, identity access management, block volumes, load balancing, audit. Ces enclaves sont très contrôlées et des politiques strictes y sont mises en place (le superdamin n'arrivera pas à connecter ces enclaves à internet).
+</p>
+<p>
+Sur le réseau les hôtes des machines ne vont accepter que les messages provenant de ces enclaves et pas des autres hôtes (protection aux VM escape attacks). Cela passe donc du côté de l'hôte par une mise en place d'une série de policies contrôlant l'origine des messages acceptés. 
+</p>
+<p>
+On retrouve également un contrôle renforcé de l'accès aux privilèges (least privilege access). Lorsqu'une entité n'utilise plus un privilège elle se le voit retiré. Enfin, plusieurs couches d'authentifications sont mises en place avant l'accès aux ressources : génération de tokens, VPN, multiple factors authentification ... 
+</p>
+<h2>Bilan</h2>
+<p>
+Afin d'assurer la sécurité de la donnée, les cloud providers appliquent plusieurs concepts de sécurité : le zero trust pour s'assurer que chaque composant est sécurisé, l'isolation pour réduire la surface d'attaque possible et le chiffrement pour sécuriser les communications. 
+</p>
+<p>
+Cependant, la protection des données in use et l'intégrité du code exécuté n'ont pas été abordés. Le concept de zero trust et d'isolation maximale doit s'appliquer à toutes les couches dans lesquelles les données sont utilisées dont l'environnement d'exécution. C'est pour cela qu'ont été introduit les Trusted execution environment.
+</p>
+<h1 id="TEE">Les Trusted Execution Environment</h1>
+<h2>Principe</h2>
+Le confidential computing consortium est un groupe composé des principaux acteurs du cloud computing (Microsoft, Amazon, red hat, Oracle ...) et les fabricants de microprocesseurs (Intel, ARM, ...) afin de travailler sur des projets de sécurisation des données in use. L'objectif est de diriger l'usage du cloud vers le confidential computing. Le confidential computing cherche à pourvoir des environnements d'exécutions basés sur le hardware permettant d'assurer principalement :
+
+<ul>
+    <li> La confidentialité des données </li>
+    <li> L'intégrité des données </li>
+    <li> L'intégrité du code </li>
+</ul>
+
+<p>
+Les solutions proposées sont basées sur le hardware puisque c'est la couche plus bas niveau possible. Ainsi des entités de non confiance telles que l'OS, l'hyperviseur, les softwares ... ne vont pas pouvoir interférer avec l'environnement d'exécution. Ces environnements sont appelés Trusted Execution Environment (TEE). 
+</p>
+<p>
+Dans le cloud ces technologies permettent au client d'avoir un plein contrôle sur les Trusted Computing Bases (TCB) puisqu'il va pouvoir définir précisément le hardware/software qui peut avoir accès au workload.  Voici quelques concepts clefs que l'on retrouve sur les TEE :
+</p>
+<h3>Isolation du code</h3> 
+Le hardware est capable d'isoler le code et les données d'un workload de tout autre code qui opère sur le système (l'OS par exemple). Ce code ne peut pas être modifié par une quelconque entité. 
+
+<h3>Chiffrement des flux de données</h3>
+Le TEE interagit avec le reste du système via des ports entrée/sortie qui permettent la circulation du flux de donnée. Le TEE fournit un moyen de chiffrement en entrée et en sortie ce flux de donnée. Ce chiffrement permet de rendre opaques les données stockées par le TEE dans une partie de la mémoire n'appartenant pas forcément au TEE.
+
+<h3>Système d'attestation</h3>
+Afin d'assurer que lors de l'utilisation du code sur le TEE, l'exécution est bien faite sur ce code, le TEE fournit un système de signature des données. Le TEE vérifie alors que chacun de ses éléments soit bien dans l'état prévu, signe les données et fournit des preuves afin d'attester que l'opération réalisée soit bien celle demandée. 
+
+<h3>Hardware root of trust</h3>
+Le TEE est un élément de confiance. Le client est assuré que la conception du hardware garantit bien toutes les exigences vues précédemment. De plus, le TEE doit être capable de garder des secrets à sa racine : clef de chiffrement, de signature.
+
+<h3>Unicité du TEE</h3>
+<p>
+Chaque TEE doit avoir une identité unique et garder le secret sur sa conception hardware. Pour cela les fabricants de TEE sont tenus au secret le plus strict. 
+</p>
+<p>
+Le confidential computing consortium impose donc ces règles pour la réalisation de TEE mais les constructeurs sont ensuite libre de la forme prise par ces TEE.
+</p>
+<img src="../../assets/secuCloud/ARMTrustZone.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+
+<h2>Solutions existantes</h2>
+Voici quelques exemples d'architectures adaptées aux TEE :
+
+<h3>AEGIS</h3>
+<p>
+Cette architecture fait l'hypothèse qu'une partie du CPU est de confiance. Elle permet de détecter toute action sur la mémoire faite par un software ou le hardware. De plus elle permet de protéger la confidentialité du code et des données en calculant le hash du code et en le stockant dans une zone sécurisée. Lorsque les données sont stockées à l'extérieur de la puce, le système d'attestation signe les données. 
+</p>
+<p>
+C'est la première architecture qui correspond à un TEE, réalisée par Suh et al. 
+</p>
+
+<h3>Trusted Platform Module (TPM)</h3>
+
+TPM est un processeur additionnel capable de stocker des clés et générer des attestations. C'est un composant passif qui peut être utilisé par d'autres logiciels si ils ont été validés par le TPM. Chaque processeur TPM possède une clef de chiffrement unique non connue de l'utilisateur et est capable de générer des clefs d'attestation lors de l'utilisation. Le TPM possède également des Platform Configuration Registers capable de stocker des valeurs hash de code ou de données. TPM permet de :
+<ul>
+    <li> S'assurer que le chiffrement et décryptage se fait sur une seule et même plateforme </li>
+    <li> S'assurer qu'un device est bien en train de faire tourner un certain software via les attestations </li>
+    <li> Sceller le code ou les données sur un certain device pour s'assurer de leur intégrité </li>
+</ul>
+
+<h3>TrustZone</h3>
+<p>
+ARM TrustZone est aujourd'hui utilisé principalement sur les smartphones. L'idée est de séparer le TEE du Rich Execution Environment. Le TEE peut accéder aux ressources de l'environnement normal mais l'inverse est impossible. Cela est permis par deux équipements : le bus de données qui assure que l'accès aux ressources n'est possible que dans un sens et un processeur TrustZone qui permet l'exécution dans l'un ou l'autre des environnements. 
+</p>
+<p>
+Au moment du démarrage de la machine il y a vérification du système de démarrage de la TrustZone et une fois validé, la TrustZone se lance. Le firmware est supposé de confiance et va initialiser tout les périphériques comme les contrôleurs de mémoires. Puis le secure OS est vérifié puis lancé. Pour vérifier les codes de confiance, les vendeurs chiffrent le code avec une clef privées et et le firmware utilise une clef publique pour déchiffrer et vérifier la signature lors de l'exécution.
+</p>
+<p>
+ARM TrustZone divise donc l'environnement d'exécution en deux : une dite "safe wolrd" et l'autre dite "normal world". Par exemple sur un smartphone qui permet la reconnaissance faciale, les points clés du visage sont stockés dans la partie de la mémoir allouée au safe world et le logiciel permettant la validation ou non d'un visage est contenu et utilisé dans le safe world. De cette manière aucune application tierce ne peut utiliser ce logiciel sans y être autorisé ou le modifier. 
+</p>
+<h3>Software Guard Extensions (SGX)</h3>
+<p>
+Intel SGX est la solution la plus répandue. Elle permet de protéger aussi bien le code des applications que les données. SGX est capable de garantir l'intégrité de ces données et de fournir des attestations locales ou à distance (vers un élément en dehors du TEE). Le principe est de placer les parties protégées de l'application dans des enclaves. Ces enclaves sont des partitions de l'environnement d'exécution qui vont être rendues accessibles via un système d'adresses géré par l'OS et l'hyperviseur de la machine. Le contenu des enclaves se situe dans la Processor Reserved Memory protégée par le CPU de tout accès par une entité autre qu'une enclave.
+</p>
+<p>
+L'entrée dans une enclave se fait par un point unique avec des instructions pour l'utiliser. Les enclaves peuvent s'assurer l'une l'autre qu'elles fonctionnent correctement (attestation locale) mais aussi assurer de leur bon fonctionnement à une autre entité (attestation à distance) avec une attestation qui serra vérifiée avec une clef fournie par Intel. 
+</p>
+<img src="../../assets/secuCloud/SGX.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+
+Un exemple d'utilisation peut être :  on partitionne le code d'un projet en différents modules de criticité différentes (système d'authentification, gestion de données sensibles, calcul simple sur des données peu importantes ...). Chaque module peut alors être envoyé sur des enclaves différentes accompagnés de privilèges d'accès à d'autres enclaves ou la mémoire dépendant de leur nécessité.
+
+
+<h3>Autres architectures</h3>
+On peut retrouver plusieurs autres architectures parfois plus adaptées aux systèmes embarqués (TrustLite, Sancus ...) ou d'autres similaires à Intel SGX (Sanctum ...). À cahque fois le principe est de diviser l'environnement d'exécution entre un (ou plusieurs) environnement sécurisé et un autre qui ne l'est pas et d'empêcher l'accès par l'environnement non sécurisé à celui sécurisé. De plus l'environnement sécurisé est capable de fournir des attestations pour assurer du bon fonctionnement de l'environnement.
+<img src="../../assets/secuCloud/arch.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+
+<h2>Les TEE et le cloud</h2>
+<p>
+Les outils vus précédemment sont bien adaptés pour réaliser de petits environnements d'exécution : smartphones, ordinateurs personnel, device IoT, ... Cependant dans le cas de technologies cloud où il faut pouvoir faire de la virtualisation ou utiliser des technologies d'accélération comme du GPU ou FPGA ces architectures ne sont pas suffisantes. En effet il faut que l'environnement soit capable de supporter des adresses multiples renvoyant à différentes machines qui, grâce à l'hyperviseur, constituent une seule machine.
+</p>
+<p>
+Les processeurs AMD fournissent alors une solution avec la Secure Encrypted Virtualization (SEV) qui permet de chiffrer la mémoire en utilisation de la VM et aussi l'état des registres à chaque transition vers l'hyperviseur. À cela est ajouté le Secure Nested Paging (SNP) qui empêche l'hyperviseur d'inférer avec l'intégrité de la mémoire de la VM.
+</p>
+<p>
+Cela va alors nécessité des adaptations des hyperviseurs, car ils ne sont plus capables de voir les états de la VM c'est ce qu'on appelle les blind hypervisor. Voici ce qu'il est possible de faire sur le cloud grâce aux TEE :
+</p>
+<h3>Confidential VMs</h3>
+Afin d'assurer la compatibilité des applications développées avec le nouvel environnement, il est possible de basculer toute la VM sur le TEE. L'avantage de cette méthode est qu'elle est rapide et simple. Cependant l'administrateur de la VM va avoir un contrôle complet sur l'écriture et la lecture des données. Dans le cas de l'image d'une VM il y a bien plus d'applications que le kernel et une application, cette méthode n'est donc pas optimale et ne permet pas d'atteindre un degrés d'isolation du code suffisant.
+
+<h3>Confidential containers</h3>
+<p>
+Le conteneur qui peut se présenter sous la forme d'un petit système de fichier comprenant le minimum requis pour faire tourner un programme unique peut tourner facilement sur une VM sans que l'administrateur y ait accès. Le TEE qui permet l'isolation du conteneur se base alors sur des mécanismes d'isolation de VM (SNP, TDX) ou sur du process-level isolation (Haven, SGX-LKL).
+</p>
+<p>
+Cependant les conteneurs ne vont pas pouvoir fournir de système d'attestation à cause de leur légèreté. Il faut donc créer de nouveaux conteneurs qui font office de système d'attestation. 
+</p>
+<h3>Enclaves</h3>
+<p>
+Comme pour les conteneurs l'isolation des enclaves peut se faire via des mécanismes d'isolation de VM ou du process-level isolation. Les développeurs peuvent partitionner leur code avec des privilèges différents à mettre sur des enclaves, comme cela peut être fait avec Intel SGX mais ici à l'échelle du cloud. Ainsi chaque enclave ne peut accéder qu'aux données qui lui sont strictement nécessaire pour remplir sa fonction. Un exemple de mise en application est Micorsoft avec <a href="https://openenclave.io/sdk/" class="link">OpenEnclave</a>.
+</p>
+<img src="../../assets/secuCloud/openEnclave.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+
+On retrouve à nouveau le principe de division de l'environnement d'exécution en deux parties. 
+
+<h2>Usages des TEE</h2>
+Les TEE possèdent plusieurs applications possibles qui répondent aux problématiques que peuvent avoir des opérateurs Télécoms lors de la migration d'application vers le cloud.
+
+<h3>Confidential AI</h3>
+Utiliser des enclaves pour faire tourner des modèles de machine learning permet d'assurer la confidentialité des données in use (données des clients) et l'intégrité du code et du résultat, puisque le système d'attestation assure que le bon modèle a été exécuté et n'a pas pu être modifié. La certitude de l'origine du résultat est cruciale lorsque l'on utilise des modèles de machine pour faire de l'aide à la décision.
+
+<h3>Confidential databases and anlytics</h3>
+Dans le cas de datacenters qui proposeraient d'utiliser des TEE, il est possible que les données soient chiffrées in rest et in use, et que l'accès aux clefs de chiffrement ne soit pas permis à l'administrateur de la base de donnée. Ainsi il n'y a que le propriétaire des données qui choisit qui peut voir ces données en clair. 
+
+<h3>Confidential Multiparty collaboration</h3>
+En passant par des TEE il est possible de mettre en commun des données entre des entités afin de faire tourner un programme, tout en gardant opaques ces données aux autres entités. Par exemple si des hôpitaux créent un algorithme de machine learning et utilisent les données de leur patient pour l'entraîner, la collaboration permet d'avoir un modèle plus précis mais les données utilisées sont sensibles et ne doivent pas être vues par les collaborateurs.
+
+<h3>Autres domaines d'applications</h3>
+Les TEE peuvent être utilisés dans plusieurs autres domaines tels que la blockchain, les technologies mobiles (ARM trustZone), les technologies edge et IoT, ... 
+
+<h1 id="Conclusion">Conclusion</h1>
+<p>
+L'utilisation du cloud permet l'accès à des ressources importantes (mémoire, calcul, accélération) facturées à l'utilisation, cela évite donc de devoir construire une infrastructure on premise chère et parfois mal dimensionnée. 
+</p>
+<p>
+Cependant le cloud est sensible à de nouvelles menaces à cause de son accessibilité et de la multiplication de composants physique et logiciels tel que les hyperviseurs. La grande surface d'attaque possible oblige les cloud provider à appliquer les principes clefs de zero trust et d'isolation maximale des machines.
+</p>
+<p>
+Les Trusted Execution Environment viennent apporter une couche d'isolation supplémentaire par le matériel et permettent la création d'environnements d'exécution sécurisés pour utiliser les applications les plus critiques. Ces environnements sont des environnements de confiance qui garantissent la confidentialité et l'intégrité des données et des codes utilisés
+</p>
+<p>
+Ces Trusted Execution Environement sont en passe de devenir la norme sur le cloud pour une utilisation sécurisée d'environnement d'exécution garantissant la protection des données in use en plus de la protection déjà existante pour les données in rest et in transit.
+</p>
+
+<h1 id="Sources">Sources</h1>
+<ul>
+<li><a href="https://www.silicon.fr/hub/colt-hub/services-telecoms-quand-le-cloud-ouvre-de-nouvelles-voies-dexploitation#" class="link">Colt, Services télécoms : quand le Cloud ouvre de nouvelles voies d’exploitation</a></li>
+<li><a href="https://www.silicon.fr/brandvoice/quest-ce-que-le-cloud-telecoms-et-comment-faire-pour-y-migrer-vos-services-iot" class="link">Silicon, Qu’est-ce que le « Cloud Télécoms » et comment faire pour y migrer vos services IoT ?"</a></li>
+<li><a href="https://www.telcodr.com/15-examples-of-how-telcos-are-moving-to-the-public-cloud/" class="link">TelcoDR, 15 examples of how telcos are moving to the public cloud</a></li>
+<li><a href="https://fr.wikipedia.org/wiki/Edge_computing" class="link">Wikipedia, Edge Computing</a></li>
+<li><a href="https://www.redhat.com/fr/topics/security/cloud-security" class="link">Red Hat, Qu'est-ce que la sécurité dans le cloud ?</a>
+<li><a href="https://www.redhat.com/fr/topics/cloud-computing/what-is-cloud-infrastructure" class="link">Red Hat, Une infrastructure cloud, qu'est-ce que c'est ?</a></li>    
+<li><a href="https://devopssec.fr/article/differences-virtualisation-et-conteneurisation" class="link">Ajadaini Hatim, Les différences entre la virtualisation et la conteneurisation</a></li>
+<li>The Great Hack, Jehane Noujaim et Karim Amer, 2019, Netflix</li>
+<li><a href="https://attack.mitre.org/matrices/enterprise/cloud/" class="link">MITRE ATTACK, Cloud Matrix</a></li>
+<li><a href="https://www.microsoft.com/security/blog/2021/03/30/new-security-signals-study-shows-firmware-attacks-on-the-rise-heres-how-microsoft-is-working-to-help-eliminate-this-entire-class-of-threats/" class="link">Microsoft Security Team, New Security Signals study shows firmware attacks on the rise; here’s how Microsoft is working to help eliminate this entire class of threats</a></li>
+<li><a href="https://www.protocol.com/newsletters/protocol-enterprise/solarwinds-hack-government?rebelltitem=1#rebelltitem1" class="link">Tom Krazit for protocol, The hack that shook Washington</a></li>
+<li><a href="https://blogs.microsoft.com/on-the-issues/2021/10/24/new-activity-from-russian-actor-nobelium/" class="link">Tom Burt, New activity from Russian actor Nobelium</a></li>
+<li><a href="https://arstechnica.com/information-technology/2017/03/hack-that-escapes-vm-by-exploiting-edge-browser-fetches-105000-at-pwn2own/" class="link">Dan Goodin ARS Technica, Virtual machine escape fetches 105,000 at Pwn2Own hacking contest [updated]</a></li>
+<li>Confidential Computing Consortium, A Technical Analysis of Confidential Computing v1.1</li>
+<li>Oracle, Oracle Cloud Infrastructure Security Architecture</li>
+<li><a href="https://www.forbes.com/sites/daveywinder/2020/01/22/microsoft-security-shocker-as-250-million-customer-records-exposed-online/?sh=725a92d44d1b" class="link">Davey Winder, Forbes, Microsoft Security Shocker As 250 Million Customer Records Exposed Online</a></li>
+<li><a href="https://msrc-blog.microsoft.com/2020/01/22/access-misconfiguration-for-customer-support-database/" class="link">Microsoft Security Response Center, Access Misconfiguration for Customer Support Database</a></li>
+<li><a href="https://www.cisecurity.org/" class="link">Center for internet security</a></li>
+<li>Thore Graepel, Kristin Lauter, and Michael Naehrig, ML Confidential: Machine Learning on Encrypted Data</li>
+<li>Confidential Computing Consortium, Confidential Computing: Hardware-Based Trusted Execution for Applications and Data</li>
+<li><a href="https://queue.acm.org/detail.cfm?id=3456125" class="link">Mark Russinovich, Manuel Costa, Cédric Fournet, David Chisnall, Antoine Delignat-Lavaud, Sylvan Clebsch, Kapil Vaswani, Vikas Bhatia, Toward Confidential Cloud Computing</a></li>
+<li>Pieter Maene Johannes Götzfried Ruan de Clercq Tilo Müller Felix Freiling and Ingrid Verbauwhede, Hardware-Based Trusted Computing Architectures for Isolation and Attestation</li>
+<li>MARK RUSSINOVICH MANUEL COSTA CÉDRIC FOURNET DAVID CHISNALL ANTOINE DELIGNAT-LAVAUD SYLVAN CLEBSCH KAPIL VASWANI VIKAS BHATIA, Toward Confidential Cloud Computing</li>
+<li><a href="https://openenclave.io/sdk/" class="link">Open Enclave SDK</a></li>
+</ul>
+    
+   

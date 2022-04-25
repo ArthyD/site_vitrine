@@ -1,0 +1,423 @@
+<h1 style="text-align:center"> Stage de deuxième année à l'Ifremer</h1>
+
+<div class="tableOfContent">
+    <ol>
+        <li><a href="/stage2A#Ifremer">L'entreprise d'accueil</a></li>
+        <li><a href="/stage2A#Contexte">Contexte de la mission</a></li>
+        <li><a href="/stage2A#Real">Mes réalisations</a></li>
+        <li><a href="/stage2A#Orga">Mon organisation</a></li>
+        <li><a href="/stage2A#Projet">Rapport à mon projet professionnel</a></li>
+    </ol>
+</div>
+<h1 id="Ifremer">L'Ifremer</h1>
+<p>
+    L'ifremer est un institut en sciences et technologies marines français. Son objectif est de mener des recherches et d'innover pour protéger et restaurer l’océan, exploiter ses ressources de manière responsable, partager les données marines et proposer de nouveaux services à tout les acteurs du monde de l'océan.
+</p>
+<p>
+    Mon stage a eu lieu dans le Service Ingénierie et Instrumentation Marine (SIIM). Ce service est chargé de la conception des systèmes instrumentaux, des observatoires océanographiques et des équipements destinés aux engins sous-marins. Ce service travaille étroitement avec l'ensemble des chercheurs de l'Ifremer afin de répondre à leurs demandes en terme de données à mesurer. Ce service développe des systèmes d’acquisition et de transmission de données ainsi que des systèmes d’imagerie pour des applications très variées allant de l’estran jusqu’aux mers profondes. 
+</p>
+<div class="grid">
+    <div class="col-4">
+        <img src="../../assets/stage2AImages/Atelier-de-montage-cablage.jpg" style="width:85%;display:block;margin-right:auto;margin-left:auto;">
+    </div>
+    <div class="col-4">
+        <img src="../../assets/stage2AImages/Atelier-Observatoires-Fond-de-mer.jpg" style="width:85%;display:block;margin-right:auto;margin-left:auto;">
+    </div>
+    <div class="col-4">
+        <img src="../../assets/stage2AImages/Integration-et-tests-d-un-systeme-d-acquisition-multi-capteurs.jpg" style="width:85%;display:block;margin-right:auto;margin-left:auto;">
+    </div>
+</div>
+
+<h1 id="Contexte">Contexte</h1>
+<p>
+Parmi les différents systèmes de mesures développés par SIIM on retrouve les observatoires fonds de mer et les flotteurs Deep-Arvor
+</p>
+<div class="grid">
+    <div class="col-6">
+        <img src="../../assets/stage2AImages/Module-ecologique-TEMPO-Mini.jpg" style="width:85%;display:block;margin-right:auto;margin-left:auto;">
+    </div>
+    <div class="col-6">
+        <img src="../../assets/stage2AImages/Avant-tout-deploiement-les-flotteurs-Deep-Arvor-sont-testes-dans-le-bassin-d-essai-de-l-Ifremer.jpg" style="height:250px;display:block;margin-right:auto;margin-left:auto;">
+    </div>
+</div>
+
+
+
+<p>
+Ces systèmes étant autonomes, l'électronique embarquée est très basse consommation et a peu de mémoire. Le système utilisé est le costof2 :
+</p>
+<img src="../../assets/stage2AImages/COSTOF2-systeme-d-acquisition-multi-capteurs.png"  style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+
+<p>
+Pour les observatoires fonds de mer, les batteries permettent d'effectuer des mesures de façon autonome pendant un an environ. Cependant, il est nécessaire de surveiller le bon fonctionnement de la station. Pour cela des missions en mer sont organisées sur les navires de l'ifremer.
+</p>
+
+<div class="grid">
+    <div class="col-6">
+        <img src="../../assets/stage2AImages/L-Atalante.jpg" style="width:85%;display:block;margin-right:auto;margin-left:auto;">
+    </div>
+    <div class="col-6">
+        <img src="../../assets/stage2AImages/Le-Pourquoi-pas-en-pleine-mer.jpg" style="width:85%;display:block;margin-right:auto;margin-left:auto;">
+    </div>
+</div>
+
+
+
+<p>
+Dans ce cas, les stations peuvent être amenées à être sorties de l'eau ou un rover tel que victor6000 plonge à la profondeur de la station.
+</p>
+<img src="../../assets/stage2AImages/Victor-6000-sur-le-Pourquoi-pas.jpg"  style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+
+<p>
+Une fois la station récupérée ou le rover à proximité, il est possible d'établir une liaison ethernet pour se connecter au Costof2 et accéder à sa dashboard. Depuis cette dashboard il est possible de configurer les différents capteurs de la station, vérifier leur bon fonctionnement ... 
+</p>
+
+<div class="grid">
+    <div class="col-6">
+        <img src="../../assets/stage2AImages/oldMain.png" style="width:85%;display:block;margin-right:auto;margin-left:auto;">
+    </div>
+    <div class="col-6">
+        <img src="../../assets/stage2AImages/oldSensor.png" style="width:85%;display:block;margin-right:auto;margin-left:auto;">
+
+    </div>
+</div>
+
+
+<p>
+Cette dashboard est fonctionnelle mais la structure de son code ne permet pas une réutilisabilité ni une modularité optimale. De plus elle n'est pas très conviviale, seuls des utilisateurs déjà habitués du système peuvent l'utiliser sans trop de problèmes.
+</p>
+<p>
+Pour palier à ces problèmes il a été décidé de refaire cet outil avec une technologie web plus moderne : Angular. L'utilisation d'Angular permet de créer des blocs (les composants) réutilisables pour d'autres plateformes, tout en fractionnant le code de manière à ce que les modifications soient les plus simple possibles. L'utilisation d'Angular permet également d'avoir accès à un certain nombre de librairies pour améliorer le design du site et faciliter le contrôle du système une fois en mer. 
+</p>
+<h1>Objectifs</h1>
+
+<p>
+L'objectif premier du stage est alors de créer divers composants permettant aussi bien de visualiser les données du système que de passer des commandes au système (allumage de capteurs, changement de paramètres ...).
+</p>
+Les contraintes à respecter étant :
+<ul>
+    <li> Réutilisabilité des composants : utilisable sur d'autres systèmes que le Costof2 </li>
+    <li> Généralité : le composant doit s'adapter quelque soit le capteur auquel il est relié </li>
+    <li> Intuitivité : les composants doivent être utilisables facilement et on doit comprendre leur utilité du premier coup d'oeil </li>
+    <li>Intégration : le système ne pouvant pas être changé, le site web doit être adapté, il y a des limitations sur ce qu'il est possible de faire </li>
+    <li> Clarté du code : le code est amené à être utilisé par d'autres personnes à l'ifremer ou à l'extérieur</li>
+</ul>
+
+<h1 id="Real">Réalisations</h1>
+
+<h2>Premières réalisations</h2>
+
+<h3>Terminal pour capteurs</h3>
+
+<p>
+La première tâche confiée était la création d'un terminal pour faire fonctionner les capteurs et voir leur retour. Le but étant d'interagir avec le capteur en lui passant des commandes et en voyant son retour.
+</p>
+<p>
+L'un des objectifs était de se rapprocher le plus possible du comportement d'un terminal d'ordinateur (retour en arrière dans les commandes, style ...) pour que son utilisation soit la plus intuitive possible.
+</p>
+<div class="grid">
+    <div class="col-4">
+        <img src="../../assets/stage2AImages/terminalOff.png" style="width:85%;display:block;margin-right:auto;margin-left:auto;">
+    </div>
+    <div class="col-4">
+        <img src="../../assets/stage2AImages/terminalEnAction.png" style="width:85%;display:block;margin-right:auto;margin-left:auto;">
+    </div>
+    <div class="col-4">
+        <img src="../../assets/stage2AImages/terminalEnActionDialog.png" style="width:85%;display:block;margin-right:auto;margin-left:auto;">
+    </div>
+</div>
+
+
+
+
+<h3>Page avec composants dynamiques</h3>
+
+<p>
+La suite de la mission s'est tournée vers de composants dynamiques permettant de visualiser les données du système en temps réels. Les premiers composants créés permettaient alors de tracer des graphes avec les données et de synchroniser l'horloge du Costof2 avec une date et heure donnée.
+</p>
+
+<div class="grid">
+    <div class="col-6">
+        <img src="../../assets/stage2AImages/mainDynPage.png" style="width:85%;display:block;margin-right:auto;margin-left:auto;">
+    </div>
+    <div class="col-6">
+        <img src="../../assets/stage2AImages/mainDynPageDialog.png" style="width:85%;display:block;margin-right:auto;margin-left:auto;">
+    </div>
+</div>
+
+
+
+<h2>Réalisation d'un driver pour sonde multiparamètre (NKE WiMo)</h2>
+<h3>Contexte de la demande</h3>
+ Les bouées côtières de l'Ifremer sont utilisées pour analyser les données de l'eau proche des côtes (turbidité, concentration et saturation en O2,...). Pour faire ces mesures, sans démultiplier le nombre de capteurs, l'Ifremer a recours à des sondes multiparamètres. Lors de mon stage une étude d'intercomparaison entre 3 sondes a été programmée. Ma mission sur le site web ayant bien avancée, il m'a été confié la tâche de créer un driver logiciel pour permettre la communication entre les systèmes de l'Ifremer (Costof2, Marel, ...) et l'une des sondes : la nke WiMo.
+ 
+<img src="../../assets/stage2AImages/wimo.jpg" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+
+
+<h3>Réalisation</h3>
+<p>
+Pour réaliser ce driver, il m'a fallu me familiariser avec la sonde et son fonctionnement à l'aide de la documentation fournie et en expérimentant grâce à l'interface web embarquée dans la sonde.
+</p>
+<p>
+Puis à partir de ces informations et des travaux déjà réalisés sur le protocole de communication de la sonde (Modbus), j'ai programmé le driver afin qu'il permette de :
+</p>
+<ul>
+    <li>Démarrer la sonde en la mettant sous tension</li>
+    <li>Initialiser les paramètres de la sonde</li>
+    <li>Lancer une mesure et vérifier qu'elle se réalise bien</li>
+    <li>Récupérer les données afin de les exploiter</li>
+</ul>
+
+<p>
+L'essentiel de mon travail a alors été d'adapter les travaux déjà réalisés pour qu'ils puissent être utilisés pour la WiMo, comprendre le fonctionnement du protocole Modbus (CRC, adressage ...), vérifier la bonne réalisation de toutes les étapes de la mesure. 
+</p>
+<h3>Tests et suite</h3>
+<p>
+La première phase de test a servi à vérifier que la sonde recevait bien les messages provenant du Costof2 et répondait en retour. Pour cela, j'ai utilisé un oscilloscope sur les broches d'entrée et de sortie de la sonde et envoyé des trames de lancement de mesure depuis le Costof2.
+</p>
+<div class="grid">
+    <div class="col-6">
+        <img src="../../assets/stage2AImages/oscillo1.jpeg" style="width:85%;display:block;margin-right:auto;margin-left:auto;">
+    </div>
+    <div class="col-6">
+        <img src="../../assets/stage2AImages/oscillo3.jpeg" style="width:85%;display:block;margin-right:auto;margin-left:auto;">
+    </div>
+</div>
+
+
+
+<p>
+Les tests suivants ont utilisés mes avancées sur le site web : le lancement des mesures et la lecture des résultats pour vérifier leur cohérence ont été fait depuis une nouvelle page.
+</p>
+<img src="../../assets/stage2AImages/mesureWidgetBasic.png" style="width:75%;display:block;margin-right:auto;margin-left:auto;">
+
+<p>
+Une fois le driver terminé, j'ai pu faire un retour à mes collègues sur l'utilisation de la sonde : difficulté de configuration, autonomie estimée.
+</p>
+<h2>Suite web</h2>
+
+<h3>Web et capteurs</h3>
+<p>
+L'une des nouveautés apportées par le site web est la possibilité de faire appel aux fonctions du Costof2, il devient alors possible de lancer une mesure d'un capteur puis de récupérer les données pour les afficher (sous forme de graphique par exemple). Mon travail a alors été de créer une page pour réaliser des mesures de façon dynamique et de les afficher. 
+</p>
+<img src="../../assets/stage2AImages/measureDyn.png" style="width:75%;display:block;margin-right:auto;margin-left:auto;">
+
+<h3>Pilotage de caméra</h3>
+
+<p>
+Certains éléments sur les stations sont pilotables. C'est le cas des caméras que l'on peut orienter en lui envoyant un angle tilt et un angle pan. J'ai alors créé un composant qui permet d'orienter la caméra en la déplaçant avec la souris ou en donnant un angle en entrée.
+</p>
+<div class="grid">
+    <div class="col-6">
+        <img src="../../assets/stage2AImages/panCam.png" style="width:85%;display:block;margin-right:auto;margin-left:auto;">
+    </div>
+    <div class="col-6">
+        <img src="../../assets/stage2AImages/tiltCam.png" style="width:85%;display:block;margin-right:auto;margin-left:auto;">
+    </div>
+</div>
+
+
+
+
+<h3>Pilotage de ballasts</h3>
+<p>
+Les ballasts pour faire remonter la station sont également pilotable. Le composant pour les piloter mesure également la pression et la température interne afin d'estimer le volume des vessies d'huile. L'affichage sur le site web s'adapte alors à ce volume et calcule la flotabilité de l'ensemble. Il est également possible de simuler ballast par ballast, un changement de pression ou de température interne.
+</p>
+<img src="../../assets/stage2AImages/mahraBallast.png" style="width:75%;display:block;margin-right:auto;margin-left:auto;">
+
+<h2>Dernières réalisations web</h2>
+<h3>Contrôle de l'inclinaison du costof</h3>
+<p>
+Le costof2 étant équipé d'un accéléromètre pour vérifier son inclinaison au fond de l'eau, il est possible de récupérer les angles de pitch et de roll et de les afficher sur l'interface web.
+</p>
+<img src="../../assets/stage2AImages/pitch&Roll.png" style="width:75%;display:block;margin-right:auto;margin-left:auto;">
+
+
+<h3>Pilotage de sorties IO</h3>
+
+<p>
+Le costof2 est équipé de broches pilotables pour générer des sorties analogiques ou des signaux PWM. On retrouve 3 broches capable de servir aussi bien d'entrée que de sortie et deux broches de sortie. L'objectif est donc de pouvoir piloter les sorties depuis le site web et de contrôler les entrées.
+</p>
+<div class="grid">
+    <div class="col-6">
+        <img src="../../assets/stage2AImages/IObasic.png" style="width:85%;display:block;margin-right:auto;margin-left:auto;">
+    </div>
+    <div class="col-6">
+        <img src="../../assets/stage2AImages/IODynamic.png" style="width:85%;display:block;margin-right:auto;margin-left:auto;">
+    </div>
+</div>
+
+
+<p>
+Afin de tester le bon fonctionnement de ce qui a été réalisé, une manipulation a été installée. A l'aide d'une carte, d'un petit circuit et d'un oscilloscope il a été possible de contrôler que les signaux générés étaient bien cohérents avec les signaux demandés.
+</p>
+<div class="grid">
+    <div class="col-4">
+        <img src="../../assets/stage2AImages/io1.jpeg" style="width:85%;display:block;margin-right:auto;margin-left:auto;">
+    </div>
+    <div class="col-4">
+        <img src="../../assets/stage2AImages/io2.jpeg" style="width:85%;display:block;margin-right:auto;margin-left:auto;">
+    </div>
+    <div class="col-4">
+        <img src="../../assets/stage2AImages/io3.jpeg" style="width:85%;display:block;margin-right:auto;margin-left:auto;">
+    </div>
+</div>
+
+
+
+
+<p>
+En connectant une sortie générant un signal PWM à une entrée il est possible de tester aussi bien l'écriture que la lecture des données.
+</p>
+
+<div class="grid">
+    <div class="col-6">
+        <img src="../../assets/stage2AImages/ioWorking.png" style="width:85%;display:block;margin-right:auto;margin-left:auto;">
+    </div>
+    <div class="col-6">
+        <img src="../../assets/stage2AImages/circuit.png" style="width:85%;display:block;margin-right:auto;margin-left:auto;">
+    </div>
+</div>
+
+
+
+
+<h3>Création de tableaux</h3>
+<p>
+De la même façon qu'il est possible de créer des graphiques, on peut créer des tableaux regroupant toutes les données et tracer un graphique avec les données de la colonne que l'on souhaite.
+</p>
+<div class="grid">
+    <div class="col-6">
+        <img src="../../assets/stage2AImages/table.png" style="width:85%;display:block;margin-right:auto;margin-left:auto;">
+    </div>
+    <div class="col-6">
+        <img src="../../assets/stage2AImages/table&Chart.png" style="width:85%;display:block;margin-right:auto;margin-left:auto;">
+    </div>
+</div>
+
+
+
+<p>
+La possibilité de télécharger directement les données du tableau au format CSV a été ajoutée.
+</p>
+<img src="../../assets/stage2AImages/csv upload.png" style="width:75%;display:block;margin-right:auto;margin-left:auto;">
+
+
+<h3>Contrôle d'un asservissement</h3>
+
+<p>
+Certains éléments du Costof2 utilisent des asservissements. Il peut alors être intéressant de contrôler la valeur du système avec la valeur de consigne et tracer les écarts.
+</p>
+<div class="grid">
+    <div class="col-6">
+        <img src="../../assets/stage2AImages/chlorator1.png" style="width:85%;display:block;margin-right:auto;margin-left:auto;">
+    </div>
+    <div class="col-6">
+        <img src="../../assets/stage2AImages/chlorator2.png" style="width:85%;display:block;margin-right:auto;margin-left:auto;">
+    </div>
+</div>
+
+
+
+
+<h3>Utilisation du bus one wire</h3>
+
+<p>
+Le costof2 utilise le bus de données one wire pour communiquer avec certains capteurs. Le principe est qu'un élément maître sur le costof récupère les adresses de tout les esclaves puis avec leurs adresses, peut récupérer leurs mesures pour les traiter. 
+</p>
+<p>
+La possibilité de récupérer les adresses sur le site a été ajoutée. A partir de cette adresse, le site donne le type d'éléments présents sur le bus, leur utilité et, si le costof2 est capable de réaliser des mesures avec, il est possible de récupérer la valeur du capteur.
+</p>
+<div class="grid">
+    <div class="col-6">
+        <img src="../../assets/stage2AImages/oneWire.png" style="width:85%;display:block;margin-right:auto;margin-left:auto;">
+    </div>
+    <div class="col-6">
+        <img src="../../assets/stage2AImages/oneWireDevice.jpeg" style="width:85%;display:block;margin-right:auto;margin-left:auto;">
+    </div>
+</div>
+
+
+
+<h1 id="Orga">Organisation du travail</h1>
+<h2>Outils utilisés</h2>
+<p>
+Pour la réalisation du site web j'ai du utiliser les langages de programmation : HTML, CSS et Typescript avec le framework Angular. La programmation du driver de la sonde s'est faite en langage C. Cela m'a permis de découvrir Angular et de renforcer mes compétences en développement web. J'ai aussi découvert de nouveaux concepts en C tels que l'allocation de mémoires, les pointeurs et les adressages. 
+</p>
+<p>
+J'ai utilisé l'ide Visual Studio Code pour sa praticité et ses nombreux outils mis à dispositions. 
+</p>
+<p>
+Enfin pour collaborer avec les différents développeurs afin d'intégrer leurs changements et de leur livrer les miens, l'outil de versionning git a été utilisé. Cela m'a permis de familiariser avec son utilisation au sein d'une équipe.
+</p>
+<h2>Organisation</h2>
+
+Pour réaliser mes tâches de manière efficace mon travail s'est organisé le plus souvent de la façon suivante :
+<ol>
+    <li> Réception de la tâche et questions pour s'assurer de la bonne compréhension de ce qui est demandé </li>
+    <li> Prototypage sur papier : schémas, découpage en tâche simple (présentation, style, fonctionnalités ...) </li>
+    <li> Tests sur le site avec simulation </li>
+    <li> Tests avec le système </li>
+    <li> Validation </li>
+    <li> Corrections et améliorations éventuelles</li>
+</ol>
+
+<p>
+Pour garder une trace de mon travail, je réalisais des bilans quotidiens de ce qui avait été réalisé avec une liste de tâches pour le lendemain.
+</p>
+<img src="../../assets/stage2AImages/bilanJournalier.jpg" style="width:75%;display:block;margin-right:auto;margin-left:auto;">
+
+<p>
+Pour la création du driver capteur mon organisation a changée avec d'une part la continuité de ma mission côté web et d'autre part la programmation et les tests sur la sonde.
+</p>
+<img src="../../assets/stage2AImages/orga.png" style="width:75%;display:block;margin-right:auto;margin-left:auto;">
+
+<h1 id="Projet">Mon projet</h1>
+
+<h2>Apprentissages</h2>
+
+Le stage a été l'occasion de développer mes compétences techniques en développement web :
+<ul>
+    <li> Découverte du framework angular </li>
+    <li> Découverte de la bibliothèque echarts </li>
+    <li> Utilisation de primeNg et primeFlex </li>
+    <li> Bonnes pratiques en développement web </li>
+</ul>
+
+En développement pour système embarqués avec microcontroleur (langage C) : 
+<ul>
+    <li> Notions en C (pointeurs, allocations mémoire ...)</li>
+    <li> Développement sur un système réel et complexe (problématique de mémoire surtout)</li>
+    <li> Bonnes pratiques pour clarté et uniformisation du code en C </li>
+</ul>
+
+Cela m'a aussi permis d'apprendre à travailler au sein d'une équipe :
+<ul>
+    <li> Présentation de mon travail</li>
+    <li> Prise de recul sur le travail effectué</li>
+    <li> S'assurer de la bonne compréhension de la tâche et de son contexte</li>
+    <li> Utiliser des outils pour collaborer : git </li>
+    <li> S'intégrer à un projet et en comprendre le contexte</li>
+</ul>
+
+La réalisation du driver de la sonde WiMo et les tests effectués m'ont appris à :
+<ul>
+    <li> Me renseigner sur un produit inconnu (documentation, datasheet)</li>
+    <li> Réaliser des tests</li>
+    <li> Faire un retour à l'équipe</li>
+    <li> Faire un retour au fabricant</li>
+</ul>
+
+Le cadre du stage m'a aussi appris quels outils sont utilisés pour observer la mer (observatoires fond de mer, profileurs dérivant, bouées), une structure possible d'un système embarqué, des protocoles de communication (Modbus, one wire), les contraintes de l'embarqué (mémoire, énergie, contraintes liées aux grands fonds).
+
+<h2>Mon projet professionnel</h2>
+
+<p>
+Ce stage s'inscrit parfaitement dans mon projet professionnel. Il m'a permis de mettre en application mes compétences en développement web et en C pour des systèmes embarqués. Bien que je ne pense pas travailler dans le développement web plus tard, cette expérience a été riche en apprentissage sur l'utilité que peut avoir le web pour créer des IHM pour les systèmes embarqués.
+</p>
+<p>
+De plus, je souhaiterais travailler dans les systèmes embarqués, mes choix d'étude m'oriente vers ce domaine. Ce stage aura été l'occasion d'échanger avec différents professionnels sur leur expérience, leur parcours et leur travail ici à Ifremer. Ainsi, j'ai pu faire mûrir mon projet grâce à ces échanges et les expériences que j'ai eu avec le système.
+</p>
+<p>
+Ce stage a donc permis de confirmer mes choix et de découvrir le milieu de l'observation des océans, milieu dans lequel je me plairais à travailler plus tard.
+</p>
