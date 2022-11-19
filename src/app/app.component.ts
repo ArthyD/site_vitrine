@@ -18,30 +18,20 @@ export class AppComponent {
 
     ngOnInit(): void {
       this.items=[
-        {
-          "label":"Mes réalisations", 
-          "items":[{"label":"Stage de première année",routerLink: ['/stage1A']},
-          {"label":"Stage de deuxième année",routerLink: ['/stage2A']},
+
+       /* {
+          "label":"Mes projets",
+          "items":[{"label":"Système de réservation de vélos",routerLink: ['/boite-clef-bdd']},
           {"label":"La sécurité dans le continuum cloud IoT",routerLink: ['/secuCloud']}
         ],
-          "icon":"pi pi-compass"
-      },
-        {
-          "label":"Mes projets",
-          "items":[{"label":"Système de réservation de vélos",routerLink: ['/boite-clef-bdd']}
-        ],
           "icon":"pi pi-code"
-      },
+      },*/
               {
                 "label":"About me",
                 "icon":"pi pi-user",
-                routerLink: ['/aboutMe']
-              },
-              {
-                "label":"Home",
-                "icon":"pi pi-home",
                 routerLink: ['/']
               }
+
             ]
     }
 

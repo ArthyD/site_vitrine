@@ -36,7 +36,7 @@ export class AboutMeSectionComponent implements OnInit {
   {"name":"Stage en recherche","date":"Juillet 2021"},
   {"name":"IMT Atlantique Nantes automatique et contrôle commande","date":"2021"},
   {"name":"Stage ingénieur à Ifremer","date":"Début 2022"},
-  {"name":"Semestre d'échange académique à TUM","date":"2022"},
+  {"name":"Semestre d\'échange académique à TUM","date":"2022"},
   {"name":"IMT Atlantique Système Embarqué Hétérogène","date":"2023"},
   {"name":"Futur","date":"Futur"}
   ]

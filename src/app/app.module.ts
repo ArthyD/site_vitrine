@@ -32,7 +32,6 @@ import {ImageModule} from 'primeng/image';
 
 import { CareerSuggestionWidgetComponent } from '../widgets/career-suggestion-widget/career-suggestion-widget.component';
 import { ImageCarousselWidgetComponent } from '../widgets/image-caroussel-widget/image-caroussel-widget.component';
-import { MainDashboardComponent } from './main-dashboard/main-dashboard.component';
 import { TimelineWidgetComponent } from '../widgets/timeline-widget/timeline-widget.component';
 import { MessagesModule } from 'primeng/messages';
 
@@ -52,7 +51,6 @@ import { BoiteClefBddComponent } from './boite-clef-bdd/boite-clef-bdd.component
     ImageCarousselWidgetComponent,
     TimelineWidgetComponent,
     AboutMeSectionComponent,
-    MainDashboardComponent,
     StagePremiereAnneeComponent,
     StageDeuxiemeAnneeComponent,
     SecuriteCloudComponent,
