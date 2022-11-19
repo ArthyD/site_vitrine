@@ -42,10 +42,10 @@ export class AboutMeSectionComponent implements OnInit {
   ]
 
   assos:any=[
-    {"name":"Bureau du développement durable","image":"../../assets/logo/bdd.png"},
-    {"name":"Animateur fresque du climat","image":"../../assets/logo/fdclimat.png"},
-    {"name":"Animateur fresque du numérique","image":"../../assets/logo/fdnumerique.png"},
-    {"name":"Coordinateur du groupe TforC","image":"../../assets/logo/tforc.png"}
+    {"name":"Bureau du développement durable","image":"assets/logo/bdd.png"},
+    {"name":"Animateur fresque du climat","image":"assets/logo/fdclimat.png"},
+    {"name":"Animateur fresque du numérique","image":"assets/logo/fdnumerique.png"},
+    {"name":"Coordinateur du groupe TforC","image":"assets/logo/tforc.png"}
   ]
 
   selectedElement:string="Prépa PCSI/PSI*";
