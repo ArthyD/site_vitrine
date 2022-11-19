@@ -79,7 +79,7 @@ Le client choisit ensuite les ressources dont il a besoin, et va installer une i
 <p>
 Il existe également la conteneurisation où le client crée des conteneurs dans le cloud dans lequel il fournit les libraires et l'application. Ces conteneurs partagent l'OS de la machine hôte. L'avantage des conteneurs réside dans leur légèreté par rapport à la mise en place d'une machine virtuelle. La conteneurisation va s'appuyer sur des outils comme Kubernetes et docker pour le déploiement et la gestion des conteneurs.
 </p>
-<img src="/assets/secuCloud/virtualisation.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+<img src="assets/secuCloud/virtualisation.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
 
 Ces concepts de virtualisation et de conteneurisation permettent la création du cloud. Les performances vont être séparées du hardware, cela permet donc à des entreprises de bénéficier de bonnes puissances de calcul (par exemple) sans avoir à investir dans du matériel très coûteux. Dans le cas du cloud le client paye à la consommation de ressources ce qui simplifie l'utilisation des ces ressources et permet de réaliser des économies.
 
@@ -93,7 +93,7 @@ Aujourd'hui on peut différencier trois types de cloud :
 
 Les services cloud les plus important aujourd'hui sont : Amazon web service, Microsoft Azure, Google cloud, Alibaba cloud, Oracle cloud, IBM cloud et Tencent cloud.
 
-<img src="/assets/secuCloud/cloudProviders.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+<img src="assets/secuCloud/cloudProviders.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
 
 <p>
 Lorsqu'un client veut déployer une application sur le cloud, il commence par choisir les ressources dont il va avoir besoin (CPU, GPU, stockage ...), l'hyperviseur va proposer ces ressources en créant un pool à partir des machines du cloud provider, le client installe une image sur la machine virtuelle et installe son application (dans le cas de virtualisation). 
@@ -101,7 +101,7 @@ Lorsqu'un client veut déployer une application sur le cloud, il commence par ch
 <p>
 Lorsque le client veut utiliser cette ressource, il se connecte via internet à la machine sur le réseau virtualisé.
 </p>
-<img src="/assets/secuCloud/useCloud.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+<img src="assets/secuCloud/useCloud.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
 
 <p>
 Dans le cas des cloud publics, tout les clients se retrouvent sur une même infrastructure. L'objectif des clients est alors de pouvoir disposer des ressources du cloud tout en assurant la confidentialité des données, leur intégrité et leur disponibilité. 
@@ -152,7 +152,7 @@ Dans cette partie nous allons nous intéresser aux différents types d'attaques 
 <p>
 Les attaques ciblant le cloud sont répertoriées dans une matrice réalisée par <a href="https://attack.mitre.org/matrices/enterprise/cloud/" class="link">MITRE</a>. On y retrouve la description de la killchain dans le cloud, c'est à dire les différents étapes permettant à un attaquant de s'introduire dans l'infrastructure, en prendre le contrôle, maintenir sa présence et exploiter son contrôle. Pour chaque étape MITRE décrit les techniques et procédés mis en place ainsi que les façon de détecter et mitiger ces attaques. 
 </p>
-<img src="/assets/secuCloud/killchain.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+<img src="assets/secuCloud/killchain.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
 
 <h3>Firmware attacks</h3>
 
@@ -172,7 +172,7 @@ Dans le cloud cette attaque se traduit par :
 
 Pour l'attaquant l'accès au firmware lui donne accès aux flux de données, aux disques,... comme si il avait un accès physique à la machine. Le firmware fait donc partie des cibles des attaques et est donc à exclure des composants de confiance sur le cloud. 
 
-<img src="/assets/secuCloud/firmware.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+<img src="assets/secuCloud/firmware.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
 
 <h3>Supply cahin attack (Software et hardware)</h3>
 <p>
@@ -202,7 +202,7 @@ Russian nation-state actor <a href="https://blogs.microsoft.com/on-the-issues/20
 <p>
 Ces attaques ont  été repérées par l'équipe de Microsoft mais sont encore peu connues ce qui le rend efficaces et inquiétantes. De plus avec le Cloud, de plus en plus d'entreprises s'ajoutent à cette supply chain et doivent être protégés des groupes comme Nobelium.
 </p>
-<img src="/assets/secuCloud/SupplyChain.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+<img src="assets/secuCloud/SupplyChain.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
 <p>
 Attaque sur la supply chain Hardware De la même façon que lors de la fabrication et/ou distribution des logiciels, le hardware peut aussi être la cible de l'installation de composants malveillants. Par exemple il est possible d'ajouter à la puce une partie permettant d'interroger un serveur DNS et de prendre contrôle de la machine à distance. Ces attaques, bien que hypothétiques,  sont très efficaces puisqu'il est impossible de détecter sur le hardware l'installation d'un device non prévu (milliards de semi conducteur et gravures avec un ordre de grandeurs du nanomètre).
 </p>
@@ -233,7 +233,7 @@ Une dernière attaque qui montre la faiblesse du cloud est l'attaque par évasio
 <p>
 <a href="https://arstechnica.com/information-technology/2017/03/hack-that-escapes-vm-by-exploiting-edge-browser-fetches-105000-at-pwn2own/" class="link">Cela a été réalisé en 2017 dans un concours de hacking</a>, l'attaque a nécessité d'exploiter : un bug de heap overfolw de Edge via le moteur Javascript, puis un type confusion flaw du kernel windows afin de s'échapper de la machine virtuelle et enfin une vulnérabilité de VMware à cause d'un buffer non initialisé. Pour résumer cette attaque revient à s'échapper d'Alcatraz puis de pénétrer Fort Knox dans la foulée. 
 </p>
-<img src="/assets/secuCloud/VMescape.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+<img src="assets/secuCloud/VMescape.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
 <p>
 Si cette attaque est réalisée, l'attaquant pourrait alors avoir accès à des données telles que la mémoire volatile des autres machines virtuelles. Il serrait alors en capacité de récupérer des informations telles que des clefs de chiffrement. 
 </p>
@@ -244,7 +244,7 @@ Ce type d'attaque montre que l'un des composants fondamentaux du cloud : l'hyper
 <p>
 Bien d'autres attaques existent comme les attaques sur protocoles, sur le software ou encore qui visent la cryptographie. Cela montre que dans le cloud la surface d'attaque est grande : tout les composants sont sujets à des vulnérabilités et les attaques peuvent venir du monde entier. 
 </p>
-<img src="/assets/secuCloud/attackmap.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+<img src="assets/secuCloud/attackmap.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
 
 Pour protéger une donnée trois concepts clefs sont à appliquer : l'isolation, le zero trust et le chiffrement. Nous allons maintenant voir ce qui se fait sur le marchée du cloud pour garantir la protection des données.
 
@@ -282,7 +282,7 @@ Le chiffrement symétrique où une clef sert à chiffrer et déchiffrer la donn�
 <p>
 Le chiffrement asymétrique où deux clefs sont générées : la clef publique qui sert à chiffrer les messages et la clef privée qui sert à déchiffrer ces messages.
 </p>
-<img src="/assets/secuCloud/chiffrement.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+<img src="assets/secuCloud/chiffrement.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
 <p>
 Les clefs doivent impérativement rester secrètes (sauf les clefs publiques) pour assurer la confidentialité des données stockées ou échangées. Le chiffrement est bien entendu mis en place par les cloud providers sur les infrastructures cloud. 
 </p>
@@ -308,7 +308,7 @@ L'une des raisons pour laquelle le cloud possède une si grande surface d'attaqu
 <p>
 Une idée est alors de séparer la virtualisation du réseau de l'hyperviseur. Il y a toujours une virtualisation du réseau mais elle est gérée par une autre machine physique avec un autre software. Cela permet de se prémunir d'attaques comme les attaques de type VM escape.
 </p>
-<img src="/assets/secuCloud/netVirt.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+<img src="assets/secuCloud/netVirt.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
 
 <h3>Séparation d'internet</h3>
 <p>
@@ -317,7 +317,7 @@ Pour sécuriser les machines sur le cloud, la stratégie est de les isoler au ma
 <p>
 Une autre possibilité est de ne plus passer par internet pour exécuter les applications dans le cloud. Pour cela le client et le datacenter cloud sont reliés par fibre optique de façon sécurisée (MACsec, chiffrement ...). Lorsque le client souhaite accéder à ses applications il le fait sur un espace en réseau entre ses machines et le datacenter mais isolé d'internet. À cela le client ajoute une isolation de son réseau interne (réseau qui ne permettent pas de se connecter à internet), la surface d'attaque est grandement réduite. 
 </p>
-<img src="/assets/secuCloud/noInternet.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+<img src="assets/secuCloud/noInternet.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
 <p>
 Pour un attaquant il faut un accès physique chez le client ou le cloud provider, mais les datacenters sont extrêmement protégés : choix de localisation stratégiques, robustesse aux pannes électriques, contrôle des accès ...
 </p>
@@ -373,7 +373,7 @@ Chaque TEE doit avoir une identité unique et garder le secret sur sa conception
 <p>
 Le confidential computing consortium impose donc ces règles pour la réalisation de TEE mais les constructeurs sont ensuite libre de la forme prise par ces TEE.
 </p>
-<img src="/assets/secuCloud/ARMTrustZone.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+<img src="assets/secuCloud/ARMTrustZone.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
 
 <h2>Solutions existantes</h2>
 Voici quelques exemples d'architectures adaptées aux TEE :
@@ -412,14 +412,14 @@ Intel SGX est la solution la plus répandue. Elle permet de protéger aussi bien
 <p>
 L'entrée dans une enclave se fait par un point unique avec des instructions pour l'utiliser. Les enclaves peuvent s'assurer l'une l'autre qu'elles fonctionnent correctement (attestation locale) mais aussi assurer de leur bon fonctionnement à une autre entité (attestation à distance) avec une attestation qui serra vérifiée avec une clef fournie par Intel. 
 </p>
-<img src="/assets/secuCloud/SGX.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+<img src="assets/secuCloud/SGX.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
 
 Un exemple d'utilisation peut être :  on partitionne le code d'un projet en différents modules de criticité différentes (système d'authentification, gestion de données sensibles, calcul simple sur des données peu importantes ...). Chaque module peut alors être envoyé sur des enclaves différentes accompagnés de privilèges d'accès à d'autres enclaves ou la mémoire dépendant de leur nécessité.
 
 
 <h3>Autres architectures</h3>
 On peut retrouver plusieurs autres architectures parfois plus adaptées aux systèmes embarqués (TrustLite, Sancus ...) ou d'autres similaires à Intel SGX (Sanctum ...). À cahque fois le principe est de diviser l'environnement d'exécution entre un (ou plusieurs) environnement sécurisé et un autre qui ne l'est pas et d'empêcher l'accès par l'environnement non sécurisé à celui sécurisé. De plus l'environnement sécurisé est capable de fournir des attestations pour assurer du bon fonctionnement de l'environnement.
-<img src="/assets/secuCloud/arch.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+<img src="assets/secuCloud/arch.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
 
 <h2>Les TEE et le cloud</h2>
 <p>
@@ -445,7 +445,7 @@ Cependant les conteneurs ne vont pas pouvoir fournir de système d'attestation �
 <p>
 Comme pour les conteneurs l'isolation des enclaves peut se faire via des mécanismes d'isolation de VM ou du process-level isolation. Les développeurs peuvent partitionner leur code avec des privilèges différents à mettre sur des enclaves, comme cela peut être fait avec Intel SGX mais ici à l'échelle du cloud. Ainsi chaque enclave ne peut accéder qu'aux données qui lui sont strictement nécessaire pour remplir sa fonction. Un exemple de mise en application est Micorsoft avec <a href="https://openenclave.io/sdk/" class="link">OpenEnclave</a>.
 </p>
-<img src="/assets/secuCloud/openEnclave.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
+<img src="assets/secuCloud/openEnclave.png" style="width:50%;display:block;margin-right:auto;margin-left:auto;">
 
 On retrouve à nouveau le principe de division de l'environnement d'exécution en deux parties. 
 
