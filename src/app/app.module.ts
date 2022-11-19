@@ -37,10 +37,9 @@ import { MessagesModule } from 'primeng/messages';
 
 import { HttpClientModule } from '@angular/common/http';
 import { AboutMeSectionComponent } from './about-me-section/about-me-section.component';
-import { StagePremiereAnneeComponent } from './stage-premiere-annee/stage-premiere-annee.component';
-import { StageDeuxiemeAnneeComponent } from './stage-deuxieme-annee/stage-deuxieme-annee.component';
 import { SecuriteCloudComponent } from './securite-cloud/securite-cloud.component';
 import { BoiteClefBddComponent } from './boite-clef-bdd/boite-clef-bdd.component';
+import { AssoComponent } from './asso/asso.component';
 
 
 @NgModule({
@@ -51,14 +50,9 @@ import { BoiteClefBddComponent } from './boite-clef-bdd/boite-clef-bdd.component
     ImageCarousselWidgetComponent,
     TimelineWidgetComponent,
     AboutMeSectionComponent,
-    StagePremiereAnneeComponent,
-    StageDeuxiemeAnneeComponent,
     SecuriteCloudComponent,
-    BoiteClefBddComponent
-
-
-
-
+    BoiteClefBddComponent,
+    AssoComponent
   ],
   imports: [
     AppRoutingModule,

@@ -19,13 +19,19 @@ export class AppComponent {
     ngOnInit(): void {
       this.items=[
 
-       /* {
+      {
           "label":"Mes projets",
           "items":[{"label":"Système de réservation de vélos",routerLink: ['/boite-clef-bdd']},
           {"label":"La sécurité dans le continuum cloud IoT",routerLink: ['/secuCloud']}
         ],
           "icon":"pi pi-code"
-      },*/
+      },
+      {
+        "label":"Mon engagement",
+        
+        "icon":"pi pi-compas",
+        routerLink: ['/associations']
+    },
               {
                 "label":"About me",
                 "icon":"pi pi-user",
