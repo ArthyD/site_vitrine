@@ -1,0 +1,60 @@
+.title{
+    font-size:35px;
+    font-weight: bolder;
+    margin-right:10px;
+    color:#7488DC;
+    text-align:center;
+    margin-bottom:20px;
+}
+.desc{
+    text-align:justify;
+}
+.link:hover{
+    cursor: pointer;
+    color:#7488DC;
+}
+.link{
+    text-decoration: none;
+    color:black;
+    font-style:italic;
+}
+
+.image{
+    border-radius: 20px;
+}
+
+.date:hover{
+    cursor: pointer;
+    color:#7488DC;
+}
+
+#mapSchools {
+    height: 600px;
+    width: 100%
+}
+
+.custom-marker {
+    display: flex;
+    width: 2rem;
+    height: 2rem;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.custom-marker:hover{
+    cursor: pointer;
+}
+
+.mainSubTitle-line{
+    border: none;
+    background-color: #EFEFEF;
+    color:#EFEFEF;
+    height: 5px;
+    width: 150px;
+    border-radius: 10px;
+    margin-top:40px;
+    margin-bottom:30px;
+  }
