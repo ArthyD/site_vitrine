@@ -1,1 +1,60 @@
-<p>home works!</p>
+<h1 class = "title">Mes projets personnels</h1>
+<div>
+    <p>Étant passionné par l'IoT, l'électronique et l'IT, je réalise chez moi de nombreux projets à l'aide de raspberry, de cartes arduino, de cartes ESP32, ...</p>
+    <p>Ces projets, en plus de m'amuser, me permettent de gagner en compétence en informatique puisque je suis amené à apprendre et utiliser des technologies tel que docker, la virtualisation, le déploiement de serveur web, ...</p>
+</div>
+
+
+
+<h1 class = "title">Mes projets arduino</h1>
+
+<div>
+    <div class = "grid">
+        <div class="col-3">
+            <img class="image" src="assets/projets/plant.png"  style="width:100%; margin-top:25%">
+        </div>
+        <div class="col-9">
+            <p>Ma plateforme pour apprendre l'électronique et le code est l'arduino. J'ai commencé il y a quelques années déjà, à réaliser des petits projets en suivant différents tutos sur internet.</p>
+            <p>Aujourd'hui, j'utilise mes Arduinos pour développer mes premiers protoypes d'application, par exemple ici sur la photo, un système récupérant la température et l'humidité de la pièce, ainsi que l'humidité de la terre d'une plante. Le but ici est de contrôler si la plante est dans un environement propice à son développement ou non.</p>
+            <p>Ce projet en apparence simple, je l'ai décliné de différentes façon en essayant de compléxifier :</p>
+            <ul>
+                <li>Application simple</li>
+                <li>Ajout d'un serveur web à l'aide d'un arduino MKR1010</li>
+                <li>Utilisation de FreeRTOS</li>
+            </ul>
+        </div>
+    </div>
+    <div>
+        <p>Tout ces projets sont disponible sur mon github : <a class="link" target="_blank" href="https://github.com/ArthyD/ArduinoProjects">ici  <i class="pi pi-github" style="font-size:1.5rem"></i></a></p>
+        <div id="carrouSchool">
+            <app-image-caroussel-widget [imageList]='[{"path":"assets/projets/plant.jpg"},{"path":"assets/projets/serverWebsite.png"},{"path":"assets/projets/HumidityLCDCircuit.png"}]'></app-image-caroussel-widget>
+        </div>
+    </div>
+</div>
+
+<h1 class = "title">Mes projets sur Raspberry Pi</h1>
+
+<div>
+    <div class = "grid">
+        <div class="col-3">
+            <img class="image" src="assets/projets/LCD_Result.png"  style="width:100%;">
+        </div>
+        <div class="col-9">
+            <p>Ma seconde plateforme de prédilection est le Raspberry Pi. Ce micro ordinateur me permet de créer des petits projets d'IT à bas coût, par exemple :</p>
+            <ul>
+                <li>Création d'un NAS</li>
+                <li>Création d'un serveur web</li>
+                <li>Utilisation de docker pour gérer des coneteneurs maison</li>
+                <li>Création d'un MQTT Broker</li>
+            </ul>
+            <p>Je réalise également des projets de développement bas niveaux tels que la création de Loadable Kernel Modules.</p>
+            <p>Le Raspberry Pi est donc pour moi une plateforme parfaite pour expérimenter.</p>
+        </div>
+    </div>
+    <div>
+        <p>Tout ces projets sont disponible sur mon github : <a class="link" target="_blank" href="https://github.com/ArthyD/RaspberryPiProjects">ici  <i class="pi pi-github" style="font-size:1.5rem"></i></a></p>
+        <div id="carrouSchool">
+            <app-image-caroussel-widget [imageList]='[{"path":"assets/projets/desktop.png"},{"path":"assets/projets/opmv4.png"},{"path":"assets/projets/LCDcircuit.png"}]'></app-image-caroussel-widget>
+        </div>
+    </div>
+</div>
