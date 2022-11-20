@@ -1,1 +1,41 @@
-<p>boite-clef-bdd works!</p>
+<h1 class = "title">Projet site de réservation de vélo</h1>
+
+<div class = "grid">
+    <div class="col-3">
+        <img src="assets/logo/bdd.png"  style="width:80%;">
+    </div>
+    <div class="col-9">
+        <p>Le Bureau du Développement Durable de IMT Atlantique met à disposition des vélos aux étudiants.</p>
+        <p>Pour l'instant, la remise des clefs d'antivols de vélos se fait en main propre. Cela pose plusieurs problèmes :</p>
+        <ul>
+            <li>Il faut une personne toujours présente pour donner des clefs</li>
+            <li>Il est difficile d'avoir un historique des réservations (surtout en cas de problème)</li>
+            <li>La récupération des clefs est compliqué</li>
+        </ul>
+    </div>
+</div>
+<div>
+    <p>C'est pourquoi l'association a décidé de créer une boit à clef autonome permettant aux étudiants de réserver en ligne leur vélo et le récupérer simplement quand ils le souhaitent.</p>
+    <p>J'ai donc travaillé sur ce projet dont le résultat peut être retrouvé sur mon github : <a class="link" href ="https://github.com/ArthyD/Site-reservation-de-velo">ici</a>.</p>
+</div>
+<div>
+
+</div>
+<h1 class = "title">Le site web</h1>
+<div>
+    <p>Le site web a été réalisé à l'aide de python Flask.</p>
+    <p>L'API permet de gérer une base de données d'utilisateurs, de réservations et de vélos à l'aide de SQLite par soucis de simplicité.</p>
+    <p>Afin de rendre la page web intuitive et jolie, le framework bootstrap a été utilisé.</p>
+</div>
+<div id="carrouSchool">
+    <app-image-caroussel-widget [imageList]='[{"path":"assets/boiteclef/login.png"},{"path":"assets/boiteclef/home.png"},{"path":"assets/boiteclef/admin.png"}]'></app-image-caroussel-widget>
+</div>
+
+<h1 class = "title">La partie arduino</h1>
+<div>
+    <p>Le serveur web communique avec la boîte physique. Cette boîte utilise un arduino MKR1010, connecté au même réseau que le serveur.</p>
+    <p>Ainsi le serveur peut donner l'ordre à la boîte de s'ouvrir quand un utilisateur veut emprunter ou rendre un vélo.</p>
+</div>
+<div id="carrouSchool">
+    <app-image-caroussel-widget [imageList]='[{"path":"assets/boiteclef/boite.png"},{"path":"assets/boiteclef/interieur.png"}]'></app-image-caroussel-widget>
+</div>
