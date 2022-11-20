@@ -23,8 +23,7 @@ export class AppComponent {
           "label":"Mes projets",
           "items":[{"label":"Système de réservation de vélos",routerLink: ['/boite-clef-bdd']},
           {"label":"Ma formation à la cybersécurité",routerLink: ['/cyber']},
-          {"label":"Projets personels à la maison",routerLink: ['/homeProjects']},
-          {"label":"La sécurité dans le continuum cloud IoT",routerLink: ['/secuCloud']},
+          {"label":"Projets personels à la maison",routerLink: ['/homeProjects']}
           
         ],
           "icon":"pi pi-code"
