@@ -40,6 +40,8 @@ import { AboutMeSectionComponent } from './about-me-section/about-me-section.com
 import { SecuriteCloudComponent } from './securite-cloud/securite-cloud.component';
 import { BoiteClefBddComponent } from './boite-clef-bdd/boite-clef-bdd.component';
 import { AssoComponent } from './asso/asso.component';
+import { CyberComponent } from './cyber/cyber.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -52,7 +54,9 @@ import { AssoComponent } from './asso/asso.component';
     AboutMeSectionComponent,
     SecuriteCloudComponent,
     BoiteClefBddComponent,
-    AssoComponent
+    AssoComponent,
+    CyberComponent,
+    HomeComponent
   ],
   imports: [
     AppRoutingModule,
